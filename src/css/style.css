@@ -1,0 +1,41 @@
+#signupButton, #loginButton, #addEmployee {
+-fx-background-color:  #1F8FE8;
+-fx-text-fill: white;
+-fx-background-radius: 1px;
+-fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,3.5 );
+}
+
+#signupButton:hover, #loginButton:hover, #addEmployee:hover{
+-fx-background-color:  #187ece;
+}
+
+#signupButton:pressed, #loginButton:pressed, #addEmployee:pressed {
+-fx-background-color:  #1F8FE8;
+-fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );
+}
+#addButton:pressed, #settingsButton:pressed {
+-fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 1,0,1,1.5 );
+}
+
+#teamBox {
+-fx-border-color: #7C8184;
+-fx-border-width: 1px 0px 0px 0px;
+}
+
+#dashboardButton:hover, #employeesButton:hover, #inventoryButton:hover {
+-fx-background-color: #2d2f3d;
+-fx-cursor: hand;
+}
+
+#dashboardButton:pressed, #employeesButton:pressed, #inventoryButton:pressed{
+-fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );
+}
+
+#dashboardAdd:hover, #dashboardSettings:hover {
+-fx-cursor: hand;
+}
+
+#dashboardAdd:pressed, #dashboardSettings:pressed{
+-fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );
+}
+

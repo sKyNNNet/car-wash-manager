@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="darklight.MainController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="240.0" style="-fx-background-color: #333645;">
+         <children>
+            <Label contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="240.0" style="-fx-background-color: #00A2D3;" text="Admin Panel" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <HBox id="dashboardButton" fx:id="dashboardTab" onMouseClicked="#showDashboardTab" prefHeight="40.0" prefWidth="240.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dashboard.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="51.0" prefWidth="165.0" text="Dashboard" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox id="employeesButton" fx:id="employeesTab" onMouseClicked="#showEmployeesTab" prefHeight="40.0" prefWidth="240.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/employs.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="51.0" prefWidth="165.0" text="Employees " textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox id="inventoryButton" fx:id="inventoryTab" onMouseClicked="#showInventoryTab" prefHeight="40.0" prefWidth="240.0">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/inventory.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="51.0" prefWidth="165.0" text="Inventory" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox id="teamBox" prefHeight="269.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+               <children>
+                  <Label prefHeight="40.0" prefWidth="240.0" text="Team Members" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <VBox prefHeight="25.0" prefWidth="240.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/ceo.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <VBox prefHeight="55.0" prefWidth="210.0">
+                                 <children>
+                                    <Label text="Grigore Ciprian" textFill="#e1e1e1">
+                                       <font>
+                                          <Font name="Ebrima" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="CEO" textFill="#e1e1e1">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox prefHeight="25.0" prefWidth="240.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/assistant.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <VBox prefHeight="55.0" prefWidth="210.0">
+                                 <children>
+                                    <Label text="Mihai Eftimie" textFill="#e1e1e1">
+                                       <font>
+                                          <Font name="Ebrima" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Assistent" textFill="#e1e1e1">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox prefHeight="25.0" prefWidth="240.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/worker.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <VBox prefHeight="55.0" prefWidth="210.0">
+                                 <children>
+                                    <Label text="Dumitru Cosmin" textFill="#e1e1e1">
+                                       <font>
+                                          <Font name="Ebrima" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Car Washer" textFill="#e1e1e1">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox prefHeight="25.0" prefWidth="240.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/worker.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <VBox prefHeight="55.0" prefWidth="210.0">
+                                 <children>
+                                    <Label text="Vicentiu Ghimbas" textFill="#e1e1e1">
+                                       <font>
+                                          <Font name="Ebrima" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Car Washer" textFill="#e1e1e1">
+                                       <VBox.margin>
+                                          <Insets left="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox fx:id="dashboardVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+         <children>
+            <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="217.0" text="Dashboard" textFill="#616161">
+                     <font>
+                        <Font name="Ebrima" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="113.0" prefWidth="560.0">
+               <children>
+                  <HBox prefHeight="250.0" prefWidth="561.0">
+                     <children>
+                        <VBox prefHeight="269.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #7fe1ff;" text="Cars washed today" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="carsWashedToday" alignment="CENTER" prefHeight="218.0" prefWidth="280.0" style="-fx-background-color: #caeef9;" text="0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="269.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #7fe1ff;" text="Cars washed this month" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="carsWashedThisMonth" alignment="CENTER" prefHeight="218.0" prefWidth="280.0" style="-fx-background-color: #caeef9;" text="0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="159.0" prefWidth="560.0">
+               <children>
+                  <HBox prefHeight="276.0" prefWidth="561.0">
+                     <children>
+                        <VBox prefHeight="264.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #87ff9f;" text="Money made today" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="269.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #87ff9f;" text="Money made this month" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="168.0" prefWidth="560.0">
+               <children>
+                  <HBox prefHeight="276.0" prefWidth="561.0">
+                     <children>
+                        <VBox prefHeight="264.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #f7eead;" text="Money spent today" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #fcffdd;" text="0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="269.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #f7eead;" text="Money spent this month" textFill="#515151">
+                                 <font>
+                                    <Font name="Ebrima Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #fcffdd;" text="0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="85.0" prefWidth="560.0">
+               <children>
+                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton id="addEmployee" fx:id="dashboardAdd" alignment="CENTER" onMouseClicked="#addCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/addMember.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="210.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="employeesVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Employees" textFill="#616161">
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="employeesTable" maxWidth="550.0" prefHeight="440.0" prefWidth="550.0">
+              <columns>
+                <TableColumn fx:id="firstName" prefWidth="100.0" text="First Name" />
+                <TableColumn fx:id="lastName" prefWidth="103.0" text="Last Name" />
+                  <TableColumn fx:id="username" prefWidth="71.0" text="Username" />
+                  <TableColumn fx:id="email" prefWidth="193.0" text="Email" />
+                  <TableColumn fx:id="rank" prefWidth="93.0" text="Rank" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </TableView>
+            <HBox prefHeight="85.0" prefWidth="560.0">
+               <children>
+                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewEmployee" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/addMember.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="210.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="inventoryVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Inventory" textFill="#616161">
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="inventoryTable" maxWidth="550.0" prefHeight="440.0" prefWidth="550.0">
+               <columns>
+                  <TableColumn fx:id="name" prefWidth="100.0" text="Name" />
+                  <TableColumn fx:id="quantity" prefWidth="103.0" text="Quantity" />
+                  <TableColumn fx:id="unit" prefWidth="71.0" text="Unit" />
+                  <TableColumn fx:id="supplier" prefWidth="167.0" text="Supplier" />
+                  <TableColumn fx:id="pricePerUnit" prefWidth="119.0" text="Price / Unit" />
+               </columns>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </TableView>
+            <HBox prefHeight="85.0" prefWidth="560.0">
+               <children>
+                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewItem" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/addMember.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="210.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button id="settingsButton" fx:id="dashboardSettings" layoutX="740.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#dashboardSettingsButton" prefHeight="25.0" prefWidth="25.0" style="-fx-background-radius: 30; -fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="700.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/settings.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
