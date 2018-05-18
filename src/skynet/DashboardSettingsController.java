@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 public class DashboardSettingsController {
 

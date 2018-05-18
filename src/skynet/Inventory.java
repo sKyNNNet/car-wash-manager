@@ -1,14 +1,16 @@
-package darklight;
+package skynet;
 
 public class Inventory {
 
+    private int id;
     private String name;
     private int quantity;
     private String unit;
     private String supplier;
     private Double pricePerUnit;
 
-    public Inventory(String name, int quantity, String unit, String supplier, Double pricePerUnit) {
+    public Inventory(int id, String name, int quantity, String unit, String supplier, Double pricePerUnit) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
@@ -16,7 +18,7 @@ public class Inventory {
         this.pricePerUnit = pricePerUnit;
     }
 
-    public Inventory(){
+    public Inventory() {
 
 
     }
@@ -60,5 +62,13 @@ public class Inventory {
 
     public void setPricePerUnit(Double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

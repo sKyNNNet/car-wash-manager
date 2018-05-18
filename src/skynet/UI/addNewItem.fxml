@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="darklight.AddNewEmployeeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.AddNewItemController">
    <children>
       <VBox prefHeight="331.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="Add New Employee" textFill="#e1e1e1">
+            <Label alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="Add New Item" textFill="#e1e1e1">
                <font>
                   <Font name="Ebrima Bold" size="24.0" />
                </font>
@@ -27,7 +26,7 @@
             </Label>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="First Name" textFill="#e1e1e1">
+                  <Label text="Name" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -35,7 +34,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="firstName" prefHeight="25.0" prefWidth="318.0">
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="318.0">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -43,10 +42,11 @@
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
-               </VBox.margin></HBox>
+               </VBox.margin>
+            </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Last Name" textFill="#e1e1e1">
+                  <Label text="Quantity" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="lastName" prefHeight="25.0" prefWidth="318.0">
+                  <TextField fx:id="quantity" prefHeight="25.0" prefWidth="318.0">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -63,7 +63,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Username" textFill="#e1e1e1">
+                  <Label text="Unit" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="username" prefHeight="25.0" prefWidth="318.0">
+                  <TextField fx:id="unit" prefHeight="25.0" prefWidth="318.0">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -80,7 +80,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Password" textFill="#e1e1e1">
+                  <Label text="Supplier" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -88,24 +88,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <PasswordField fx:id="password" prefHeight="25.0" prefWidth="354.0">
-                     <HBox.margin>
-                        <Insets left="120.0" top="10.0" />
-                     </HBox.margin>
-                  </PasswordField>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label text="Email" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="email" prefHeight="25.0" prefWidth="318.0">
+                  <TextField fx:id="supplier" prefHeight="25.0" prefWidth="318.0">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -114,7 +97,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Rank" textFill="#e1e1e1">
+                  <Label text="Price / Unit" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -122,7 +105,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="rank" prefHeight="25.0" prefWidth="318.0">
+                  <TextField fx:id="pricePerUnit" prefHeight="25.0" prefWidth="318.0">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -131,7 +114,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="225.0" layoutY="331.0" onMouseClicked="#saveNewEmployee" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
+      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="225.0" layoutY="300.0" onMouseClicked="#saveNewItem" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

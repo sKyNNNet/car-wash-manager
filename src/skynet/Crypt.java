@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;

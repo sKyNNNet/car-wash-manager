@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="darklight.MainController">
+<AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.MainController">
    <children>
       <VBox prefHeight="600.0" prefWidth="240.0" style="-fx-background-color: #333645;">
          <children>
@@ -423,13 +423,13 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <TableView fx:id="employeesTable" maxWidth="550.0" prefHeight="440.0" prefWidth="550.0">
+            <TableView fx:id="employeesTable" maxWidth="550.0" prefHeight="440.0">
               <columns>
                 <TableColumn fx:id="firstName" prefWidth="100.0" text="First Name" />
                 <TableColumn fx:id="lastName" prefWidth="103.0" text="Last Name" />
                   <TableColumn fx:id="username" prefWidth="71.0" text="Username" />
                   <TableColumn fx:id="email" prefWidth="193.0" text="Email" />
-                  <TableColumn fx:id="rank" prefWidth="93.0" text="Rank" />
+                  <TableColumn fx:id="rank" prefWidth="79.0" text="Rank" />
               </columns>
                <VBox.margin>
                   <Insets left="5.0" />
@@ -437,7 +437,7 @@
             </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#employeeEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -480,13 +480,13 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <TableView fx:id="inventoryTable" maxWidth="550.0" prefHeight="440.0" prefWidth="550.0">
+            <TableView fx:id="inventoryTable" maxWidth="550.0" prefHeight="440.0">
                <columns>
-                  <TableColumn fx:id="name" prefWidth="100.0" text="Name" />
-                  <TableColumn fx:id="quantity" prefWidth="103.0" text="Quantity" />
-                  <TableColumn fx:id="unit" prefWidth="71.0" text="Unit" />
-                  <TableColumn fx:id="supplier" prefWidth="167.0" text="Supplier" />
-                  <TableColumn fx:id="pricePerUnit" prefWidth="119.0" text="Price / Unit" />
+                  <TableColumn fx:id="name" prefWidth="138.0" text="Name" />
+                  <TableColumn fx:id="quantity" prefWidth="72.0" text="Quantity" />
+                  <TableColumn fx:id="unit" prefWidth="56.0" text="Unit" />
+                  <TableColumn fx:id="supplier" prefWidth="158.0" text="Supplier" />
+                  <TableColumn fx:id="pricePerUnit" prefWidth="97.0" text="Price / Unit" />
                </columns>
                <VBox.margin>
                   <Insets left="5.0" />
@@ -494,7 +494,7 @@
             </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#inventoryEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>

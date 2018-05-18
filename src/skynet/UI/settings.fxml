@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="darklight.AddCarWashController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.DashboardSettingsController">
    <children>
       <VBox prefHeight="331.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="New car wash" textFill="#e1e1e1">
+            <Label alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="Settings" textFill="#e1e1e1">
                <font>
                   <Font name="Ebrima Bold" size="24.0" />
                </font>
@@ -34,18 +34,19 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <RadioButton fx:id="interiorCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
+                  <TextField>
                      <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
+                        <Insets left="5.0" top="15.0" />
                      </HBox.margin>
-                  </RadioButton>
+                  </TextField>
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
-               </VBox.margin></HBox>
+               </VBox.margin>
+            </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Exterior cleaning" textFill="#e1e1e1">
+                  <Label text="Interior cleaning" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -53,16 +54,16 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <RadioButton fx:id="exteriorCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
+                  <TextField>
                      <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
+                        <Insets left="5.0" top="15.0" />
                      </HBox.margin>
-                  </RadioButton>
+                  </TextField>
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Engine cleaning" textFill="#e1e1e1">
+                  <Label text="Interior cleaning" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -70,16 +71,16 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <RadioButton fx:id="engineCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
+                  <TextField>
                      <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
+                        <Insets left="5.0" top="15.0" />
                      </HBox.margin>
-                  </RadioButton>
+                  </TextField>
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="161.0" text="Polishing &amp; waxing" textFill="#e1e1e1">
+                  <Label text="Interior cleaning" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -87,33 +88,16 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <RadioButton fx:id="polishingWaxing" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="172.0" text="Upholstery cleaning" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
+                  <TextField>
                      <HBox.margin>
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="upholsteryCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
+                  </TextField>
                </children>
             </HBox>
          </children>
       </VBox>
-      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="225.0" layoutY="300.0" onMouseClicked="#addNewCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add">
+      <JFXButton id="addEmployee" fx:id="saveButton" alignment="CENTER" layoutX="225.0" layoutY="300.0" onMouseClicked="#saveDashboardSettings" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

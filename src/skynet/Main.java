@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

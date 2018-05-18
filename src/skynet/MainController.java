@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +44,7 @@ public class MainController implements Initializable {
     Label carsWashedThisMonth;
 
     @FXML
-    TableView employeesTable;
+    TableView<Employee> employeesTable;
     @FXML
     TableColumn firstName;
     @FXML
@@ -57,7 +57,7 @@ public class MainController implements Initializable {
     TableColumn rank;
 
     @FXML
-    TableView inventoryTable;
+    TableView<Inventory> inventoryTable;
     @FXML
     TableColumn name;
     @FXML
@@ -88,6 +88,9 @@ public class MainController implements Initializable {
         updateDashboard();
         updateEmployees();
         updateInventory();
+
+        employeesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        inventoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
@@ -142,6 +145,76 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public void inventoryEditButton(){
+
+        Inventory item  = inventoryTable.getSelectionModel().getSelectedItem();
+
+        if(item != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("UI/editItem.fxml"));
+
+                Parent root = fxmlLoader.load();
+
+                EditItemController controller = fxmlLoader.getController();
+
+                controller.name.setText(item.getName());
+                controller.quantity.setText(String.valueOf(item.getQuantity()));
+                controller.unit.setText(item.getUnit());
+                controller.supplier.setText(item.getSupplier());
+                controller.pricePerUnit.setText(String.valueOf(item.getPricePerUnit()));
+                controller.editItemTextTitle.setText("Edit item #" + item.getId());
+
+                Stage mainStage = new Stage();
+                Scene mainScene = new Scene(root);
+                mainStage.setResizable(false);
+                mainStage.setScene(mainScene);
+                mainStage.show();
+
+                //when we get back to the main window we refresh the stats
+                mainStage.focusedProperty().addListener((ov, t, t1) -> updateInventory());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void employeeEditButton(){
+
+        Employee employee  = employeesTable.getSelectionModel().getSelectedItem();
+
+        if(employee != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("UI/editEmployee.fxml"));
+
+                Parent root = fxmlLoader.load();
+
+                EditEmployeeController controller = fxmlLoader.getController();
+
+                controller.firstName.setText(employee.getFirstName());
+                controller.lastName.setText(employee.getLastName());
+                controller.username.setText(employee.getUsername());
+                controller.email.setText(employee.getEmail());
+                controller.rank.setText(employee.getRank());
+                controller.editEmployeeTextTitle.setText("Edit employee #" + employee.getId());
+
+                Stage mainStage = new Stage();
+                Scene mainScene = new Scene(root);
+                mainStage.setResizable(false);
+                mainStage.setScene(mainScene);
+                mainStage.show();
+
+                //when we get back to the main window we refresh the stats
+                mainStage.focusedProperty().addListener((ov, t, t1) -> updateEmployees());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void dashboardSettingsButton() {

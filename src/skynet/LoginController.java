@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

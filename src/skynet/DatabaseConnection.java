@@ -1,4 +1,4 @@
-package darklight;
+package skynet;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -196,13 +196,14 @@ public class DatabaseConnection {
             ResultSet rset = stmt.executeQuery(employeesSql);
 
             while (rset.next()) {
+                int id = rset.getInt("id");
                 String firstName = rset.getString("firstName");
                 String lastName = rset.getString("lastName");
                 String username = rset.getString("username");
                 String email = rset.getString("email");
                 String rank = rset.getString("rank");
 
-                employee.add(new Employee(username, firstName, lastName, email, rank));
+                employee.add(new Employee(id, username, firstName, lastName, email, rank));
             }
 
         } catch (SQLException e) {
@@ -225,13 +226,14 @@ public class DatabaseConnection {
             ResultSet rset = stmt.executeQuery(inventorySQL);
 
             while (rset.next()) {
+                int id = rset.getInt("id");
                 String name = rset.getString("name");
                 int quantity = rset.getInt("quantity");
                 String unit = rset.getString("unit");
                 String supplier = rset.getString("supplier");
                 Double pricePerUnit = rset.getDouble("pricePerUnit");
 
-                invetory.add(new Inventory(name, quantity, unit, supplier, pricePerUnit));
+                invetory.add(new Inventory(id, name, quantity, unit, supplier, pricePerUnit));
             }
 
         } catch (SQLException e) {
@@ -301,5 +303,59 @@ public class DatabaseConnection {
             }
         }
 
+    }
+
+    public void editItem(int id, String name, int quantity, String unit, String supplier, Double pricePerUnit){
+        connect();
+
+        try {
+
+            stmt = connection.createStatement();
+            String sql =    "UPDATE inventory "
+                            + "SET id=" + id + ", name='" + name + "', " + "quantity=" + quantity + ", " + "unit='" + unit + "', " + "supplier='" + supplier + "', " + "pricePerUnit=" + pricePerUnit + " "
+                            + "WHERE id=" + id +";";
+
+            //System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void editEmployee(int id, String username, String firstName, String lastName, String email, String rank){
+        connect();
+
+        try {
+
+            //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                            + "SET id=" + id + ", username='" + username + "', " + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                            + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteById(String tableName, int id){
+        connect();
+
+        try {
+
+            stmt = connection.createStatement();
+            String sql = "DELETE FROM " + tableName + " WHERE id=" + id;
+
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,14 +1,16 @@
-package darklight;
+package skynet;
 
 public class Employee {
 
+    private int id;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String rank;
 
-    public Employee(String username, String firstName, String lastName, String email, String rank) {
+    public Employee(int id, String username, String firstName, String lastName, String email, String rank) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,6 +20,14 @@ public class Employee {
 
     public Employee(){
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
