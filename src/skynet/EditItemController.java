@@ -29,7 +29,7 @@ public class EditItemController {
 
     public void deleteSelectedItemButton(Event event){
         int id = Integer.parseInt(editItemTextTitle.getText().split("#")[1]);
-        
+
         db.deleteById("inventory", id);
 
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.EditEmployeeController">
+   <children>
+      <VBox prefHeight="331.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="editEmployeeTextTitle" alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="Edit Employee" textFill="#e1e1e1">
+               <font>
+                  <Font name="Ebrima Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="First Name" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="firstName" prefHeight="25.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin></HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="Last Name" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="lastName" prefHeight="25.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="Username" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="username" prefHeight="25.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="Email" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="email" prefHeight="25.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="Rank" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="rank" prefHeight="25.0" prefWidth="318.0">
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="47.0" layoutY="333.0" onMouseClicked="#editEmployeeDeleteButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Delete">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton id="addEmployee" fx:id="addButton1" alignment="CENTER" layoutX="402.0" layoutY="333.0" onMouseClicked="#editEmployeeSaveButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
