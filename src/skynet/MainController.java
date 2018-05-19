@@ -1,21 +1,26 @@
 package skynet;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -74,10 +79,24 @@ public class MainController implements Initializable {
     @FXML
     Button dashboardSettings;
 
+    @FXML
+    VBox teamMembersVBox;
+
+    @FXML
+    VBox leftPanelVBox;
+
+    @FXML
+    AnchorPane mainePane;
+
+    @FXML
+    AnchorPane scrollBoxPane;
+
+
     private DatabaseConnection db = new DatabaseConnection();
 
+
     private final String inactiveSelection = "-fx-background-color: #333645;";
-    private final String activeSelection = "-fx-background-color: #2d2f3d;";
+    private final String activeSelection = "-fx-background-color: #2d2f3d; -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,6 +111,55 @@ public class MainController implements Initializable {
         employeesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         inventoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        //set the scroll pane for team members (if needed)
+        ScrollPane scrollPane = new ScrollPane(teamMembersVBox);
+        scrollPane.setFitToWidth(true);
+        scrollBoxPane.getChildren().add(scrollPane);
+    }
+
+    public void addTeamMemberToLayout(String name, String rank) {
+        VBox member = new VBox();
+        HBox hbox = new HBox();
+        VBox info = new VBox();
+        Label nameLabel = new Label();
+        Label rankLabel = new Label();
+
+        ImageView icon = new ImageView();
+
+        Image ceo = new Image("icons/ceo.png");
+        Image assistant = new Image("icons/assistant.png");
+        Image carWasher = new Image("icons/worker.png");
+
+        if (rank.equals("CEO")) {
+            icon.setImage(ceo);
+
+        } else if (rank.equals("Assistent")) {
+            icon.setImage(assistant);
+
+        } else if (rank.equals("Car Washer")) {
+            icon.setImage(carWasher);
+
+        }
+
+        icon.setPreserveRatio(true);
+        icon.setFitWidth(30);
+        icon.setFitHeight(30);
+
+
+        nameLabel.setText(name);
+        rankLabel.setText(rank);
+
+        member.getStyleClass().add("memberVBox");
+        info.getStyleClass().add("memberInfoVBox");
+        nameLabel.getStyleClass().add("memberNameText");
+        rankLabel.getStyleClass().add("memberRankText");
+
+        info.getChildren().add(nameLabel);
+        info.getChildren().add(rankLabel);
+        hbox.getChildren().add(icon);
+        hbox.getChildren().add(info);
+        member.getChildren().add(hbox);
+        teamMembersVBox.getChildren().add(member);
     }
 
     public void addCarWash() {
@@ -147,11 +215,11 @@ public class MainController implements Initializable {
 
     }
 
-    public void inventoryEditButton(){
+    public void inventoryEditButton() {
 
-        Inventory item  = inventoryTable.getSelectionModel().getSelectedItem();
+        Inventory item = inventoryTable.getSelectionModel().getSelectedItem();
 
-        if(item != null) {
+        if (item != null) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("UI/editItem.fxml"));
@@ -182,11 +250,11 @@ public class MainController implements Initializable {
         }
     }
 
-    public void employeeEditButton(){
+    public void employeeEditButton() {
 
-        Employee employee  = employeesTable.getSelectionModel().getSelectedItem();
+        Employee employee = employeesTable.getSelectionModel().getSelectedItem();
 
-        if(employee != null) {
+        if (employee != null) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("UI/editEmployee.fxml"));
@@ -285,6 +353,15 @@ public class MainController implements Initializable {
         rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
 
         employeesTable.setItems(data);
+
+        teamMembersVBox.getChildren().clear();
+
+        for (Employee emp : e) {
+            String fullName = emp.getFirstName() + " " + emp.getLastName();
+            addTeamMemberToLayout(fullName, emp.getRank());
+
+        }
+
     }
 
     public void updateInventory() {

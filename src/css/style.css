@@ -1,5 +1,5 @@
 /*
-buttons style
+ ☐ ☐ buttons style
 */
 #signupButton, #loginButton, #addEmployee {
     -fx-background-color:  #1F8FE8;
@@ -42,6 +42,37 @@ buttons style
     -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );
 }
 
+
+.memberVBox {
+    -fx-padding: 15 0 0 10;
+}
+.memberInfoVBox {
+    -fx-padding: 0 0 0 15;
+}
+
+.memberNameText {
+    -fx-font-size: 14px ;
+    -fx-font-family: Embrima;
+    -fx-text-fill: #e1e1e1;
+}
+
+.memberRankText {
+    -fx-font-size: 12px ;
+    -fx-font-family: System;
+    -fx-text-fill: #e1e1e1;
+}
+
+/*
+trasparent scrollpanel
+*/
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
 
 /*
 tableview style

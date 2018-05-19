@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.MainController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="240.0" style="-fx-background-color: #333645;">
+      <VBox fx:id="leftPanelVBox" prefHeight="600.0" prefWidth="240.0" style="-fx-background-color: #333645;">
          <children>
             <Label contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="240.0" style="-fx-background-color: #00A2D3;" text="Admin Panel" textFill="WHITE">
                <font>
@@ -95,12 +95,12 @@
                   </Label>
                </children>
             </HBox>
-            <VBox id="teamBox" prefHeight="269.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
+            <VBox id="teamBox" maxWidth="1.7976931348623157E308" minHeight="345.0" prefHeight="345.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
                <children>
-                  <Label prefHeight="40.0" prefWidth="240.0" text="Team Members" textFill="#e1e1e1">
+                  <Label fx:id="teamMembersTextLabel" prefHeight="40.0" prefWidth="240.0" text="Team Members" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima" size="16.0" />
                      </font>
@@ -111,171 +111,11 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <VBox prefHeight="25.0" prefWidth="240.0">
+                  <AnchorPane fx:id="scrollBoxPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/ceo.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <VBox prefHeight="55.0" prefWidth="210.0">
-                                 <children>
-                                    <Label text="Grigore Ciprian" textFill="#e1e1e1">
-                                       <font>
-                                          <Font name="Ebrima" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="CEO" textFill="#e1e1e1">
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
+                        <VBox fx:id="teamMembersVBox" prefHeight="300.0" prefWidth="240.0" />
                      </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox prefHeight="25.0" prefWidth="240.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/assistant.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <VBox prefHeight="55.0" prefWidth="210.0">
-                                 <children>
-                                    <Label text="Mihai Eftimie" textFill="#e1e1e1">
-                                       <font>
-                                          <Font name="Ebrima" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="Assistent" textFill="#e1e1e1">
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox prefHeight="25.0" prefWidth="240.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/worker.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <VBox prefHeight="55.0" prefWidth="210.0">
-                                 <children>
-                                    <Label text="Dumitru Cosmin" textFill="#e1e1e1">
-                                       <font>
-                                          <Font name="Ebrima" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="Car Washer" textFill="#e1e1e1">
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox prefHeight="25.0" prefWidth="240.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/worker.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <VBox prefHeight="55.0" prefWidth="210.0">
-                                 <children>
-                                    <Label text="Vicentiu Ghimbas" textFill="#e1e1e1">
-                                       <font>
-                                          <Font name="Ebrima" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="Car Washer" textFill="#e1e1e1">
-                                       <VBox.margin>
-                                          <Insets left="15.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </VBox>
+                  </AnchorPane>
                </children>
             </VBox>
          </children>

@@ -24,7 +24,6 @@ public class AddNewEmployeeController {
 
         db.addEmployee(username.getText(), password, firstName.getText(), lastName.getText(), email.getText(), rank.getText());
 
-
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
 
     }
