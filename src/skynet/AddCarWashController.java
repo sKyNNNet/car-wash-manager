@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 
 public class AddCarWashController {
 
@@ -19,14 +21,30 @@ public class AddCarWashController {
     public void addNewCarWash(Event event){
         DatabaseConnection db = new DatabaseConnection();
 
-        db.addCarWash(boolToInt(interiorCleaning.isSelected()), boolToInt(exteriorCleaning.isSelected()), boolToInt(engineCleaning.isSelected()), boolToInt(polishingWaxing.isSelected()), boolToInt(upholsteryCleaning.isSelected()));
+        List<Price> prices = db.getPrices();
+
+        double interiorCleaningPrice = 0;
+        double exteriorCleaningPrice = 0;
+        double engineCleaningPrice = 0;
+        double polishingWaxingPrice = 0;
+        double upholsteryCleaningPrice = 0;
+
+        for(Price p : prices) {
+            if(p.getServiceType().equals("interiorCleaning") && interiorCleaning.isSelected())
+                interiorCleaningPrice = p.getPriceValue();
+            if(p.getServiceType().equals("exteriorCleaning") && exteriorCleaning.isSelected())
+                exteriorCleaningPrice = p.getPriceValue();
+            if(p.getServiceType().equals("engineCleaning") && engineCleaning.isSelected())
+                engineCleaningPrice = p.getPriceValue();
+            if(p.getServiceType().equals("polishingAndWaxing") && polishingWaxing.isSelected())
+                polishingWaxingPrice = p.getPriceValue();
+            if(p.getServiceType().equals("upholsteryCleaning") && upholsteryCleaning.isSelected())
+                upholsteryCleaningPrice = p.getPriceValue();
+        }
+
+        db.addCarWash(interiorCleaningPrice, exteriorCleaningPrice, engineCleaningPrice, polishingWaxingPrice, upholsteryCleaningPrice);
 
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
 
-    }
-
-
-    public int boolToInt(boolean b) {
-        return b ? 1 : 0;
     }
 }

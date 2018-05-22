@@ -134,7 +134,7 @@
                   </Label>
                </children>
             </HBox>
-            <VBox prefHeight="113.0" prefWidth="560.0">
+            <VBox prefHeight="222.0" prefWidth="560.0">
                <children>
                   <HBox prefHeight="250.0" prefWidth="561.0">
                      <children>
@@ -162,7 +162,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="159.0" prefWidth="560.0">
+            <VBox prefHeight="217.0" prefWidth="560.0">
                <children>
                   <HBox prefHeight="276.0" prefWidth="561.0">
                      <children>
@@ -173,7 +173,7 @@
                                     <Font name="Ebrima Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
+                              <Label fx:id="moneyMadeToday" alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
                            </children>
                         </VBox>
                         <VBox prefHeight="269.0" prefWidth="280.0">
@@ -183,35 +183,7 @@
                                     <Font name="Ebrima Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="168.0" prefWidth="560.0">
-               <children>
-                  <HBox prefHeight="276.0" prefWidth="561.0">
-                     <children>
-                        <VBox prefHeight="264.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #f7eead;" text="Money spent today" textFill="#515151">
-                                 <font>
-                                    <Font name="Ebrima Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #fcffdd;" text="0" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="269.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #f7eead;" text="Money spent this month" textFill="#515151">
-                                 <font>
-                                    <Font name="Ebrima Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #fcffdd;" text="0" />
+                              <Label fx:id="moneyMadeThisMonth" alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
                            </children>
                         </VBox>
                      </children>

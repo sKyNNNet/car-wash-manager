@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.DashboardSettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.SettingsController">
    <children>
       <VBox prefHeight="331.0" prefWidth="600.0">
          <children>
@@ -22,6 +22,14 @@
                </font>
                <VBox.margin>
                   <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label prefHeight="23.0" prefWidth="609.0" text="Set services prices" textFill="#e1e1e1">
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
                </VBox.margin>
             </Label>
             <HBox prefHeight="50.0" prefWidth="600.0">
@@ -34,7 +42,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField>
+                  <TextField fx:id="interiorCleaning">
                      <HBox.margin>
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
@@ -46,7 +54,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Interior cleaning" textFill="#e1e1e1">
+                  <Label text="Exterior cleaning" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -54,7 +62,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField>
+                  <TextField fx:id="exteriorCleaning">
                      <HBox.margin>
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
@@ -63,7 +71,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Interior cleaning" textFill="#e1e1e1">
+                  <Label text="Engine cleaning" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -71,7 +79,7 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField>
+                  <TextField fx:id="engineCleaning">
                      <HBox.margin>
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
@@ -80,7 +88,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="600.0">
                <children>
-                  <Label text="Interior cleaning" textFill="#e1e1e1">
+                  <Label text="Polishing &amp; waxing" textFill="#e1e1e1">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -88,7 +96,24 @@
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField>
+                  <TextField fx:id="polishingAndWaxing">
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <Label text="Upholstery cleaning" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="upholsteryCleaning">
                      <HBox.margin>
                         <Insets left="5.0" top="15.0" />
                      </HBox.margin>
@@ -97,7 +122,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton id="addEmployee" fx:id="saveButton" alignment="CENTER" layoutX="225.0" layoutY="300.0" onMouseClicked="#saveDashboardSettings" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
+      <JFXButton id="addEmployee" alignment="CENTER" layoutX="225.0" layoutY="346.0" onMouseClicked="#saveSettingsButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

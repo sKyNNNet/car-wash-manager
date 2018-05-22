@@ -14,6 +14,9 @@ public class DatabaseConnection {
     private Connection connection;
     private Statement stmt;
 
+    public String sqlToday = "DAY(date)=DAY(NOW())";
+    public String sqlThisMonth = "MONTH(date)=MONTH(NOW());";
+
     public void connect() {
 
         System.out.println("Connecting database...");
@@ -66,13 +69,13 @@ public class DatabaseConnection {
         return false;
     }
 
-    public void addUser(String username, String password) {
+    public void addUser(String username, String password, String firstName, String lastName, String email, String rank) {
         connect();
 
         try {
             stmt = connection.createStatement();
             String sql = "INSERT INTO users " +
-                    "VALUES (null, " + username + ", " + password + ")";
+                    "VALUES (null, '" + username + "', '" + password + "', '" +firstName + "', '" +lastName +"', '" + email + "', '" + rank + "')";
 
             stmt.executeUpdate(sql);
 
@@ -96,7 +99,79 @@ public class DatabaseConnection {
 
     }
 
-    public void addCarWash(int interiorCleaning, int exteriorCleaning, int engineCleaning, int polishingWaxing, int upholsteryCleaning) {
+    public void updatePrice(int id, String serviceType, Double priceValue){
+        connect();
+
+        try {
+            stmt = connection.createStatement();
+            String sql =    "UPDATE prices "
+                    + "SET id=" + id + ", serviceType='" + serviceType + "', " + "priceValue=" + priceValue + " "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public double getPriceByServiceType(String serviceType){
+        connect();
+
+        double price= 0;
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql = "SELECT priceValue FROM prices WHERE serviceType='" + serviceType +"';";
+
+            //System.out.println(sql);
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                price = rset.getDouble("priceValue");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return price;
+
+    }
+
+
+    public List<Price> getPrices(){
+
+        connect();
+
+        List<Price> prices = new ArrayList<>();
+
+        try {
+            stmt = connection.createStatement();
+
+            String pricesSQL = "SELECT * FROM carwashmanager.prices";
+            ResultSet rset = stmt.executeQuery(pricesSQL);
+
+            while (rset.next()) {
+                int id = rset.getInt("id");
+                String serviceType = rset.getString("serviceType");
+                Double priceValue = rset.getDouble("priceValue");
+
+                prices.add(new Price(id, serviceType, priceValue));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return prices;
+    }
+
+    public void addCarWash(double interiorCleaning, double exteriorCleaning, double engineCleaning, double polishingWaxing, double upholsteryCleaning) {
         connect();
 
         Date dt = new Date();
@@ -105,12 +180,14 @@ public class DatabaseConnection {
 
         String currentDate = sdf.format(dt);
 
+        Double totalPrice = interiorCleaning + exteriorCleaning + engineCleaning + polishingWaxing + upholsteryCleaning;
+
         try {
             stmt = connection.createStatement();
             String sql = "INSERT INTO track " +
-                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + "\'" + currentDate +  "\'" + ")";
+                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + totalPrice + ", " + "\'" + currentDate +  "\'" + ")";
 
-            System.out.println(sql);
+            //System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
@@ -133,7 +210,33 @@ public class DatabaseConnection {
 
     }
 
-    public String carsWashedToday(){
+    public Double moneyMade(String date){
+        connect();
+
+        double moneyMade= 0;
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql = "SELECT SUM(totalPrice) from track where " + date + ";";
+
+            //System.out.println(sql);
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                moneyMade = rset.getDouble("SUM(totalPrice)");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return moneyMade;
+    }
+
+
+    public String carsWashed(String date){
         connect();
 
         int carsWashedToday = 0;
@@ -141,7 +244,7 @@ public class DatabaseConnection {
         try{
             stmt = connection.createStatement();
 
-            String sql = "SELECT count(date) from track where DAY(date)=DAY(NOW());";
+            String sql = "SELECT count(date) from track where " + date + ";";
 
             //System.out.println(sql);
 
@@ -156,31 +259,6 @@ public class DatabaseConnection {
         }
 
         return String.valueOf(carsWashedToday);
-    }
-
-    public String carsWashedThisMonth(){
-        connect();
-
-        int carsWashedThisMonth = 0;
-
-        try{
-            stmt = connection.createStatement();
-
-            String sql = "SELECT count(date) from track where MONTH(date)=MONTH(NOW());";
-
-            //System.out.println(sql);
-
-            stmt = connection.createStatement();
-            ResultSet rset = stmt.executeQuery(sql);
-
-            while (rset.next()) {
-                carsWashedThisMonth = rset.getInt("count(date)");
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-        return String.valueOf(carsWashedThisMonth);
     }
 
     public List<Employee> getEmployees(){

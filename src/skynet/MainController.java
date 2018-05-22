@@ -1,9 +1,12 @@
 package skynet;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,11 +23,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
 
 public class MainController implements Initializable {
@@ -47,6 +52,10 @@ public class MainController implements Initializable {
     Label carsWashedToday;
     @FXML
     Label carsWashedThisMonth;
+    @FXML
+    Label moneyMadeToday;
+    @FXML
+    Label moneyMadeThisMonth;
 
     @FXML
     TableView<Employee> employeesTable;
@@ -115,6 +124,7 @@ public class MainController implements Initializable {
         ScrollPane scrollPane = new ScrollPane(teamMembersVBox);
         scrollPane.setFitToWidth(true);
         scrollBoxPane.getChildren().add(scrollPane);
+
     }
 
     public void addTeamMemberToLayout(String name, String rank) {
@@ -287,7 +297,21 @@ public class MainController implements Initializable {
 
     public void dashboardSettingsButton() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("UI/settings.fxml"));
+            DatabaseConnection db = new DatabaseConnection();
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UI/settings.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            SettingsController controller = fxmlLoader.getController();
+
+            controller.interiorCleaning.setText(String.valueOf(db.getPriceByServiceType("interiorCleaning")));
+            controller.exteriorCleaning.setText(String.valueOf(db.getPriceByServiceType("exteriorCleaning")));
+            controller.engineCleaning.setText(String.valueOf(db.getPriceByServiceType("engineCleaning")));
+            controller.polishingAndWaxing.setText(String.valueOf(db.getPriceByServiceType("polishingAndWaxing")));
+            controller.upholsteryCleaning.setText(String.valueOf(db.getPriceByServiceType("upholsteryCleaning")));
+
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
             mainStage.setResizable(false);
@@ -295,7 +319,7 @@ public class MainController implements Initializable {
             mainStage.show();
 
             //when we get back to the main window we refresh the stats
-            mainStage.focusedProperty().addListener((ov, t, t1) -> updateDashboard());
+            mainStage.focusedProperty().addListener((ov, t, t1) -> updateInventory());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -336,8 +360,11 @@ public class MainController implements Initializable {
     }
 
     public void updateDashboard() {
-        carsWashedToday.setText(db.carsWashedToday());
-        carsWashedThisMonth.setText(db.carsWashedThisMonth());
+        carsWashedToday.setText(db.carsWashed(db.sqlToday));
+        carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
+
+        moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString());
+        moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString());
     }
 
     public void updateEmployees() {
