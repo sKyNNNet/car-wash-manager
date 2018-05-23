@@ -63,6 +63,27 @@
 }
 
 /*
+menu style
+*/
+
+.menu-item {
+    -fx-font-size: 14px ;
+    -fx-font-family: Embrima;
+    -fx-text-fill: #e1e1e1;
+    -fx-background-color:  #F8F8F8;
+}
+
+/*dropdown background*/
+.context-menu {
+    -fx-background-color: #F8F8F8;
+    -fx-text-fill: black;
+}
+
+.menu-item:focused {
+     -fx-background-color: #1f8fe8;
+}
+
+/*
 trasparent scrollpanel
 */
 

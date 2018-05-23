@@ -17,8 +17,8 @@ public class DatabaseConnection {
     public String sqlToday = "DAY(date)=DAY(NOW())";
     public String sqlThisMonth = "MONTH(date)=MONTH(NOW());";
 
-    public void connect() {
 
+    public void connect() {
         System.out.println("Connecting database...");
 
         try {
@@ -97,6 +97,36 @@ public class DatabaseConnection {
             }
         }
 
+    }
+
+    public String getRankByUsername(String username){
+
+        connect();
+
+        String rank = "unranked";
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql =  "SELECT `rank` FROM users WHERE username='" + username + "';";
+
+            System.out.println(sql);
+
+            //System.out.println(sql);
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                rank = rset.getString("rank");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("db rank:" + rank);
+
+        return rank;
     }
 
     public void updatePrice(int id, String serviceType, Double priceValue){

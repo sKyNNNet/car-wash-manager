@@ -1,5 +1,6 @@
 package skynet;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,13 +20,16 @@ public class EditEmployeeController implements Initializable {
     @FXML TextField lastName;
     @FXML TextField username;
     @FXML TextField email;
-    @FXML TextField rank;
+    @FXML JFXComboBox rank;
     @FXML Label editEmployeeTextTitle;
 
     private DatabaseConnection db = new DatabaseConnection();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
+
         //allow only alphanumeric input for username
         username.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[a-zA-Z0-9]*$")) {
@@ -65,7 +70,7 @@ public class EditEmployeeController implements Initializable {
         if(Utility.validEmail(email.getText())) {
             int id = Integer.parseInt(editEmployeeTextTitle.getText().split("#")[1]);
 
-            db.editEmployee(id, username.getText(), firstName.getText(), lastName.getText(), email.getText(), rank.getText());
+            db.editEmployee(id, username.getText(), firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
 
             ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
         } else {
@@ -73,6 +78,8 @@ public class EditEmployeeController implements Initializable {
                 new Popup(Alert.AlertType.WARNING, "Error", "Invalid email format!");
             }
         }
+
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
 
     }
 

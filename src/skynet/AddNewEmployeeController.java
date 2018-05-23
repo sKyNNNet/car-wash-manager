@@ -1,5 +1,6 @@
 package skynet;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jdk.jshell.execution.Util;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,10 +20,13 @@ public class AddNewEmployeeController implements Initializable {
     @FXML TextField username;
     @FXML PasswordField password;
     @FXML TextField email;
-    @FXML TextField rank;
+    @FXML JFXComboBox rank;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
+
+
         //allow only alphanumeric input for username
         username.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[a-zA-Z0-9]*$")) {
@@ -68,7 +71,7 @@ public class AddNewEmployeeController implements Initializable {
 
             String encryptedPassword = crypt.encrypt(this.password.getText());
 
-            db.addEmployee(username.getText(), encryptedPassword, firstName.getText(), lastName.getText(), email.getText(), rank.getText());
+            db.addEmployee(username.getText(), encryptedPassword, firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
 
             if(password.getText().isEmpty()){
                 new Popup(Alert.AlertType.WARNING, "Info", "User " + username.getText() + " has no password set.");

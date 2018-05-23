@@ -1,53 +1,51 @@
 package skynet;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.ImageView;
 
-import javax.xml.crypto.Data;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
 
 
 public class MainController implements Initializable {
 
+    private final String inactiveSelection = "-fx-background-color: #333645;";
+    private final String activeSelection = "-fx-background-color: #2d2f3d; -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );";
     @FXML
     HBox dashboardTab;
+    @FXML
+    VBox carWasherDashboard;
     @FXML
     HBox employeesTab;
     @FXML
     HBox inventoryTab;
-
     @FXML
     VBox dashboardVBox;
     @FXML
     VBox employeesVBox;
     @FXML
     VBox inventoryVBox;
-
     @FXML
     Label carsWashedToday;
     @FXML
@@ -56,7 +54,6 @@ public class MainController implements Initializable {
     Label moneyMadeToday;
     @FXML
     Label moneyMadeThisMonth;
-
     @FXML
     TableView<Employee> employeesTable;
     @FXML
@@ -69,7 +66,6 @@ public class MainController implements Initializable {
     TableColumn email;
     @FXML
     TableColumn rank;
-
     @FXML
     TableView<Inventory> inventoryTable;
     @FXML
@@ -82,30 +78,25 @@ public class MainController implements Initializable {
     TableColumn supplier;
     @FXML
     TableColumn pricePerUnit;
-
     @FXML
     Button dashboardAdd;
     @FXML
     Button dashboardSettings;
-
     @FXML
     VBox teamMembersVBox;
-
     @FXML
     VBox leftPanelVBox;
-
     @FXML
     AnchorPane mainePane;
-
     @FXML
     AnchorPane scrollBoxPane;
-
+    @FXML
+    MenuButton userMenu;
+    @FXML
+    JFXButton adminDashboardEditButton;
 
     private DatabaseConnection db = new DatabaseConnection();
-
-
-    private final String inactiveSelection = "-fx-background-color: #333645;";
-    private final String activeSelection = "-fx-background-color: #2d2f3d; -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );";
+    private String loginRank = "unranked";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,15 +126,21 @@ public class MainController implements Initializable {
         Label rankLabel = new Label();
 
         ImageView icon = new ImageView();
+        ImageView editUserInfoImgView = new ImageView();
 
         Image ceo = new Image("icons/ceo.png");
         Image assistant = new Image("icons/assistant.png");
         Image carWasher = new Image("icons/worker.png");
+        Image editUserInfoImg = new Image("icons/editEmployeeInfo3.png");
+
+
+        Button editUserInfoButton = new Button();
+
 
         if (rank.equals("CEO")) {
             icon.setImage(ceo);
 
-        } else if (rank.equals("Assistent")) {
+        } else if (rank.equals("Assistant")) {
             icon.setImage(assistant);
 
         } else if (rank.equals("Car Washer")) {
@@ -154,6 +151,11 @@ public class MainController implements Initializable {
         icon.setPreserveRatio(true);
         icon.setFitWidth(30);
         icon.setFitHeight(30);
+
+        editUserInfoImgView.setImage(editUserInfoImg);
+        editUserInfoImgView.setPreserveRatio(true);
+        editUserInfoImgView.setFitWidth(18);
+        editUserInfoImgView.setFitHeight(18);
 
 
         nameLabel.setText(name);
@@ -166,9 +168,67 @@ public class MainController implements Initializable {
 
         info.getChildren().add(nameLabel);
         info.getChildren().add(rankLabel);
+        info.setPrefWidth(210);
         hbox.getChildren().add(icon);
         hbox.getChildren().add(info);
+
+        //if logged in as CEO we can edit all user infos
+        if (loginRank.equals("CEO")) {
+            editUserInfoButton.setGraphic(editUserInfoImgView);
+            editUserInfoButton.setText("");
+            editUserInfoButton.setStyle("-fx-background-color: transparent; fx-margin: 5 0 0 0;");
+            editUserInfoButton.setCursor(Cursor.HAND);
+            editUserInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("UI/editUserSettings.fxml"));
+                        Stage mainStage = new Stage();
+                        Scene mainScene = new Scene(root);
+                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                        mainStage.setResizable(false);
+                        mainStage.setScene(mainScene);
+                        mainStage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+            hbox.getChildren().add(editUserInfoButton);
+        }
+
+        //if logged in as Assistant
+        if (loginRank.equals("Assistant") && !rank.equals("CEO")) {
+            editUserInfoButton.setGraphic(editUserInfoImgView);
+            editUserInfoButton.setText("");
+            editUserInfoButton.setStyle("-fx-background-color: transparent; fx-margin: 5 0 0 0;");
+            editUserInfoButton.setCursor(Cursor.HAND);
+            editUserInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("UI/editUserSettings.fxml"));
+                        Stage mainStage = new Stage();
+                        Scene mainScene = new Scene(root);
+                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                        mainStage.setResizable(false);
+                        mainStage.setScene(mainScene);
+                        mainStage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+            hbox.getChildren().add(editUserInfoButton);
+        }
+
+
         member.getChildren().add(hbox);
+
         teamMembersVBox.getChildren().add(member);
     }
 
@@ -177,6 +237,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addCarWash.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -195,6 +256,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewEmployee.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -212,6 +274,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewItem.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -247,6 +310,7 @@ public class MainController implements Initializable {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -277,11 +341,21 @@ public class MainController implements Initializable {
                 controller.lastName.setText(employee.getLastName());
                 controller.username.setText(employee.getUsername());
                 controller.email.setText(employee.getEmail());
-                controller.rank.setText(employee.getRank());
-                controller.editEmployeeTextTitle.setText("Edit employee #" + employee.getId());
+
+                if (employee.getRank().equals("CEO"))
+                    controller.rank.getSelectionModel().select(0);
+                else if (employee.getRank().equals("Assistant"))
+                    controller.rank.getSelectionModel().select(1);
+                else if (employee.getRank().equals("Car Washer"))
+                    controller.rank.getSelectionModel().select(2);
+                else
+                    controller.rank.getSelectionModel().select(3);
+
+                controller.editEmployeeTextTitle.setText("Edit Employee #" + employee.getId());
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -314,6 +388,7 @@ public class MainController implements Initializable {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -360,49 +435,124 @@ public class MainController implements Initializable {
     }
 
     public void updateDashboard() {
-        carsWashedToday.setText(db.carsWashed(db.sqlToday));
-        carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                carsWashedToday.setText(db.carsWashed(db.sqlToday));
+                carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
 
-        moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString());
-        moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString());
+                moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString());
+                moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString());
+            }
+        });
     }
 
     public void updateEmployees() {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                List<Employee> e = db.getEmployees();
 
-        List<Employee> e = db.getEmployees();
+                ObservableList<Employee> data = FXCollections.observableArrayList(e);
 
-        ObservableList<Employee> data = FXCollections.observableArrayList(e);
+                firstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+                lastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+                username.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
+                email.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
+                rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
 
-        firstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-        lastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        username.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
-        email.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
-        rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
+                employeesTable.setItems(data);
 
-        employeesTable.setItems(data);
+                teamMembersVBox.getChildren().clear();
 
-        teamMembersVBox.getChildren().clear();
+                for (Employee emp : e) {
+                    String fullName = emp.getFirstName() + " " + emp.getLastName();
+                    addTeamMemberToLayout(fullName, emp.getRank());
 
-        for (Employee emp : e) {
-            String fullName = emp.getFirstName() + " " + emp.getLastName();
-            addTeamMemberToLayout(fullName, emp.getRank());
+                }
+            }
+        });
+    }
 
+    public void updateInventory() {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                List<Inventory> i = db.getInventory();
+
+                ObservableList<Inventory> data = FXCollections.observableArrayList(i);
+
+                name.setCellValueFactory(new PropertyValueFactory<Inventory, String>("name"));
+                quantity.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("quantity"));
+                unit.setCellValueFactory(new PropertyValueFactory<Inventory, String>("unit"));
+                supplier.setCellValueFactory(new PropertyValueFactory<Inventory, String>("supplier"));
+                pricePerUnit.setCellValueFactory(new PropertyValueFactory<Inventory, Double>("pricePerUnit"));
+
+                inventoryTable.setItems(data);
+            }
+        });
+    }
+
+    public void logoutUser(Event event) {
+        try {
+
+            mainePane.getScene().getWindow().hide();
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UI/login.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            Stage mainStage = new Stage();
+            Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.setResizable(false);
+            mainStage.setScene(mainScene);
+            mainStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
-    public void updateInventory() {
+    public void openUserSettings() {
 
-        List<Inventory> i = db.getInventory();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UI/userSettings.fxml"));
 
-        ObservableList<Inventory> data = FXCollections.observableArrayList(i);
+            Parent root = fxmlLoader.load();
 
-        name.setCellValueFactory(new PropertyValueFactory<Inventory, String>("name"));
-        quantity.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("quantity"));
-        unit.setCellValueFactory(new PropertyValueFactory<Inventory, String>("unit"));
-        supplier.setCellValueFactory(new PropertyValueFactory<Inventory, String>("supplier"));
-        pricePerUnit.setCellValueFactory(new PropertyValueFactory<Inventory, Double>("pricePerUnit"));
+            UserSettings controller = fxmlLoader.getController();
 
-        inventoryTable.setItems(data);
+            Stage mainStage = new Stage();
+            Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.setResizable(false);
+            mainStage.setScene(mainScene);
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setUserMenuUsername(String username) {
+        userMenu.setText(username);
+        loginRank = db.getRankByUsername(userMenu.getText());
+
+        updateEmployees();
+
+        restrictUsage();
+    }
+
+    public void restrictUsage(){
+        if(loginRank.equals("Car Washer")){
+            dashboardVBox.setVisible(false);
+            carWasherDashboard.setVisible(true);
+        }
+
+        if(loginRank.equals("CEO")){
+            dashboardVBox.setVisible(true);
+            carWasherDashboard.setVisible(false);
+        }
     }
 }

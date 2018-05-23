@@ -41,9 +41,9 @@
             <Image url="@../../logo/logo.png" />
          </image>
       </ImageView>
-      <Hyperlink layoutX="418.0" layoutY="353.0" onMouseClicked="#alreadyMemberButton" text="Already a member? Sign in" textFill="#a2a2a2" />
+      <Hyperlink fx:id="alreadyMemberHP" layoutX="418.0" layoutY="353.0" onMouseClicked="#alreadyMemberButton" text="Already a member? Sign in" textFill="#a2a2a2" />
       <JFXTextField fx:id="username" focusColor="#1f8fe8" layoutX="23.0" layoutY="140.0" prefHeight="25.0" prefWidth="152.0" />
       <JFXTextField fx:id="email" focusColor="#1f8fe8" layoutX="23.0" layoutY="209.0" prefHeight="25.0" prefWidth="152.0" />
-      <JFXPasswordField fx:id="password" focusColor="#1f8fe8" layoutX="25.0" layoutY="282.0" prefHeight="25.0" prefWidth="152.0" />
+      <JFXPasswordField fx:id="password" focusColor="#1f8fe8" layoutX="25.0" layoutY="282.0" onAction="#signUpButton" prefHeight="25.0" prefWidth="152.0" />
    </children>
 </AnchorPane>

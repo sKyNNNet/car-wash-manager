@@ -43,6 +43,7 @@ public class EditItemController implements Initializable {
 
         if(quantity.getText().isEmpty()){
             new Popup(Alert.AlertType.INFORMATION, "Info", "Quantity volume is set to 0.");
+            quantity.setText("0");
         }
 
         if(supplier.getText().isEmpty()){

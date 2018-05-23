@@ -97,6 +97,7 @@ public class SignUpController implements Initializable {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();

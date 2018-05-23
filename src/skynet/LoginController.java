@@ -11,8 +11,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 
 public class LoginController {
@@ -20,9 +22,28 @@ public class LoginController {
     @FXML TextField loginPassowrd;
     @FXML Button loginButton;
 
-
     @FXML
     public void login(ActionEvent event) throws IOException {
+
+        ((Node)event.getSource()).getScene().getWindow().hide();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("UI/main.fxml"));
+
+        Parent root = fxmlLoader.load();
+
+        MainController controller = fxmlLoader.getController();
+
+        controller.setUserMenuUsername(loginUsername.getText());
+
+        Stage mainStage = new Stage();
+        Scene mainScene = new Scene(root);
+        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+        mainStage.setResizable(false);
+        mainStage.setScene(mainScene);
+        mainStage.show();
+
+        /*
         DatabaseConnection db = new DatabaseConnection();
         boolean goodLogin = db.checkLogin(loginUsername.getText(), loginPassowrd.getText());
 
@@ -42,6 +63,7 @@ public class LoginController {
             alert.setContentText("Incorrect username or password!");
             alert.showAndWait();
         }
+        */
     }
 
     public void signUpButton(Event event){
