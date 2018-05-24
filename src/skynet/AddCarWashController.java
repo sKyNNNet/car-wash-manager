@@ -1,5 +1,6 @@
 package skynet;
 
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,11 +12,11 @@ import java.util.List;
 
 public class AddCarWashController {
 
-    @FXML RadioButton interiorCleaning;
-    @FXML RadioButton exteriorCleaning;
-    @FXML RadioButton engineCleaning;
-    @FXML RadioButton polishingWaxing;
-    @FXML RadioButton upholsteryCleaning;
+    @FXML JFXRadioButton interiorCleaning;
+    @FXML JFXRadioButton exteriorCleaning;
+    @FXML JFXRadioButton engineCleaning;
+    @FXML JFXRadioButton polishingWaxing;
+    @FXML JFXRadioButton upholsteryCleaning;
 
     @FXML
     public void addNewCarWash(Event event){

@@ -1,119 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #333645;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.AddCarWashController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="321.0" style="-fx-background-color: #FAFAFA;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.AddCarWashController">
    <children>
-      <VBox prefHeight="331.0" prefWidth="600.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="23.0" prefWidth="609.0" text="New car wash" textFill="#e1e1e1">
-               <font>
-                  <Font name="Ebrima Bold" size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label text="Interior cleaning" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="interiorCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label text="Exterior cleaning" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="exteriorCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label text="Engine cleaning" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="engineCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="161.0" text="Polishing &amp; waxing" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="polishingWaxing" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Label prefHeight="18.0" prefWidth="172.0" text="Upholstery cleaning" textFill="#e1e1e1">
-                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <RadioButton fx:id="upholsteryCleaning" mnemonicParsing="false" prefHeight="17.0" prefWidth="434.0">
-                     <HBox.margin>
-                        <Insets left="50.0" top="15.0" />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="225.0" layoutY="300.0" onMouseClicked="#addNewCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add">
+      <Label alignment="CENTER" layoutX="75.0" layoutY="15.0" prefHeight="31.0" prefWidth="172.0" text="New car wash" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="110.0" text="Interior cleaning" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="interiorCleaning" layoutX="247.0" layoutY="111.0" prefHeight="17.0" prefWidth="13.0" text=" " />
+      <Label layoutX="15.0" layoutY="160.0" text="Exterior cleaning" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="exteriorCleaning" layoutX="247.0" layoutY="161.0" prefHeight="0.0" prefWidth="31.0" text=" " />
+      <Label layoutX="15.0" layoutY="210.0" text="Engine cleaning" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="engineCleaning" layoutX="247.0" layoutY="211.0" prefHeight="17.0" prefWidth="13.0" text=" " />
+      <Label layoutX="15.0" layoutY="260.0" prefHeight="18.0" prefWidth="161.0" text="Polishing &amp; waxing" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="polishingWaxing" layoutX="247.0" layoutY="261.0" prefHeight="17.0" prefWidth="13.0" text=" " />
+      <Label layoutX="15.0" layoutY="310.0" prefHeight="18.0" prefWidth="172.0" text="Upholstery cleaning" textFill="#616161">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="upholsteryCleaning" layoutX="247.0" layoutY="311.0" prefHeight="17.0" prefWidth="13.0" text=" " />
+      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="86.0" layoutY="380.0" onMouseClicked="#addNewCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

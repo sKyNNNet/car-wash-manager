@@ -96,6 +96,17 @@ trasparent scrollpanel
 }
 
 /*
+radiobutton style
+*/
+
+.jfx-radio-button {
+    -jfx-selected-color: #1f8fe8;
+}
+.jfx-rippler {
+    -jfx-rippler-fill: #1f8fe8;
+}
+
+/*
 tableview style
 */
 

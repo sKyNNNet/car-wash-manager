@@ -182,7 +182,7 @@ public class MainController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("UI/editUserSettings.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("UI/userSettings.fxml"));
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
                         mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
@@ -209,7 +209,7 @@ public class MainController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("UI/editUserSettings.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("UI/userSettings.fxml"));
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
                         mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
