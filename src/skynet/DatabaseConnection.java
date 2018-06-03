@@ -392,14 +392,13 @@ public class DatabaseConnection {
         try {
             stmt = connection.createStatement();
 
-            String employeesSql = "SELECT * FROM carwashmanager.users";
+            String employeesSql = "SELECT * FROM carwashmanager.employees";
             ResultSet rset = stmt.executeQuery(employeesSql);
 
             while (rset.next()) {
                 int id = rset.getInt("id");
                 String firstName = rset.getString("firstName");
                 String lastName = rset.getString("lastName");
-                String username = rset.getString("username");
                 String email = rset.getString("email");
                 String rank = rset.getString("rank");
 
@@ -411,6 +410,37 @@ public class DatabaseConnection {
         }
 
         return employee;
+    }
+
+    public List<User> getUsers(){
+
+        connect();
+
+        List<User> users = new ArrayList<>();
+
+        try {
+            stmt = connection.createStatement();
+
+            String usersSql = "SELECT * FROM carwashmanager.users";
+            ResultSet rset = stmt.executeQuery(usersSql);
+
+            while (rset.next()) {
+                int id = rset.getInt("id");
+                String firstName = rset.getString("firstName");
+                String lastName = rset.getString("lastName");
+                String username = rset.getString("username");
+                String email = rset.getString("email");
+                String rank = rset.getString("rank");
+
+
+                users.add(new User(id, username, firstName, lastName, email, rank));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     public List<Inventory> getInventory(){
@@ -443,13 +473,13 @@ public class DatabaseConnection {
         return invetory;
     }
 
-    public void addEmployee(String username, String password, String firstName, String lastName, String email, String rank) {
+    public void addEmployee(String firstName, String lastName, String email, String rank) {
         connect();
 
         try {
             stmt = connection.createStatement();
-            String sql = "INSERT INTO users " +
-                    "VALUES (null, '" + username + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + email + "', '" + rank + "')";
+            String sql = "INSERT INTO employees " +
+                    "VALUES (null, '"+ firstName + "', '" + lastName + "', '" + email + "', '" + rank + "')";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -524,14 +554,14 @@ public class DatabaseConnection {
 
     }
 
-    public void editEmployee(int id, String username, String firstName, String lastName, String email, String rank){
+    public void editEmployee(int id,String firstName, String lastName, String email, String rank){
         connect();
 
         try {
 
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
-            String sql =    "UPDATE users "
+            String sql =    "UPDATE employees "
                             + "SET id=" + id + ", username='" + username + "', " + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
                             + "WHERE id=" + id +";";
 
@@ -549,42 +579,8 @@ public class DatabaseConnection {
 
         try {
             stmt = connection.createStatement();
-            String sql =    "UPDATE users "
+            String sql =    "UPDATE employees "
                     + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "' "
-                    + "WHERE id=" + id +";";
-
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateUserSettings(int id, String firstName, String lastName, String username, String email, String password){
-        connect();
-
-        try {
-            stmt = connection.createStatement();
-            String sql =    "UPDATE users "
-                    + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', username='" + username +"', password='" + password + "' "
-                    + "WHERE id=" + id +";";
-
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateUserSettings(int id, String firstName, String lastName, String username, String email){
-        connect();
-
-        try {
-            stmt = connection.createStatement();
-            String sql =    "UPDATE users "
-                    + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', username='" + username + "' "
                     + "WHERE id=" + id +";";
 
             System.out.println(sql);

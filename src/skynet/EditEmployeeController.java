@@ -18,7 +18,6 @@ public class EditEmployeeController implements Initializable {
 
     @FXML TextField firstName;
     @FXML TextField lastName;
-    @FXML TextField username;
     @FXML TextField email;
     @FXML JFXComboBox rank;
     @FXML Label editEmployeeTextTitle;
@@ -29,14 +28,6 @@ public class EditEmployeeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
-
-        //allow only alphanumeric input for username
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^[a-zA-Z0-9]*$")) {
-                username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]*$", ""));
-            }
-        });
-
         //allow only letter for first name / last name
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\sa-zA-Z*")) {
@@ -61,22 +52,12 @@ public class EditEmployeeController implements Initializable {
             new Popup(Alert.AlertType.WARNING, "Error", "Last name can't be empty");
             return;
         }
-
-        if(username.getText().isEmpty()){
-            new Popup(Alert.AlertType.WARNING, "Error", "Username can't be empty");
-            return;
-        }
-
         if(Utility.validEmail(email.getText())) {
             int id = Integer.parseInt(editEmployeeTextTitle.getText().split("#")[1]);
 
-            db.editEmployee(id, username.getText(), firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
+            db.editEmployee(id,firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
 
             ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
-        } else {
-            if(username.getText().isEmpty()){
-                new Popup(Alert.AlertType.WARNING, "Error", "Invalid email format!");
-            }
         }
 
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
@@ -86,7 +67,7 @@ public class EditEmployeeController implements Initializable {
     public void editEmployeeDeleteButton(Event event){
         int id = Integer.parseInt(editEmployeeTextTitle.getText().split("#")[1]);
 
-        db.deleteById("users", id);
+        db.deleteById("employee", id);
 
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }

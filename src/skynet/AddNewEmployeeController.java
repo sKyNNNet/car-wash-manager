@@ -17,23 +17,12 @@ public class AddNewEmployeeController implements Initializable {
 
     @FXML TextField firstName;
     @FXML TextField lastName;
-    @FXML TextField username;
-    @FXML PasswordField password;
     @FXML TextField email;
     @FXML JFXComboBox rank;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
-
-
-        //allow only alphanumeric input for username
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^[a-zA-Z0-9]*$")) {
-                username.setText(newValue.replaceAll("[^\\sa-zA-Z0-9]*$", ""));
-            }
-        });
-
         //allow only letter for first name / last name
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\sa-zA-Z*")) {
@@ -60,22 +49,10 @@ public class AddNewEmployeeController implements Initializable {
             return;
         }
 
-        if(username.getText().isEmpty()){
-            new Popup(Alert.AlertType.WARNING, "Error", "Username can't be empty");
-            return;
-        }
-
         if(Utility.validEmail(email.getText())){
             DatabaseConnection db = new DatabaseConnection();
-            Crypt crypt = new Crypt();
 
-            String encryptedPassword = crypt.encrypt(this.password.getText());
-
-            db.addEmployee(username.getText(), encryptedPassword, firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
-
-            if(password.getText().isEmpty()){
-                new Popup(Alert.AlertType.WARNING, "Info", "User " + username.getText() + " has no password set.");
-            }
+            db.addEmployee(firstName.getText(), lastName.getText(), email.getText(), rank.getValue().toString());
 
             ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
         } else {

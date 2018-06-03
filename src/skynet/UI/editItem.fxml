@@ -14,29 +14,29 @@
             <Font name="Ebrima Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="110.0" text="Name" textFill="#616161">
+      <Label layoutX="14.0" layoutY="110.0" text="Name" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="180.0" text="Quantity" textFill="#616161">
+      <Label layoutX="14.0" layoutY="180.0" text="Quantity" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="250.0" text="Unit" textFill="#616161">
+      <Label layoutX="14.0" layoutY="250.0" text="Unit" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="320.0" text="Supplier" textFill="#616161">
+      <Label layoutX="14.0" layoutY="320.0" text="Supplier" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="390.0" text="Price / Unit" textFill="#616161">
+      <Label layoutX="14.0" layoutY="390.0" text="Price / Unit" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
       <JFXButton id="addEmployee" alignment="CENTER" layoutX="265.0" layoutY="487.0" onMouseClicked="#saveSelectedItemButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
@@ -55,30 +55,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="name" focusColor="#1f8fe8" layoutX="10.0" layoutY="130.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="quantity" focusColor="#1f8fe8" layoutX="12.0" layoutY="200.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="unit" focusColor="#1f8fe8" layoutX="14.0" layoutY="270.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="supplier" focusColor="#1f8fe8" layoutX="14.0" layoutY="340.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="pricePerUnit" focusColor="#1f8fe8" layoutX="14.0" layoutY="410.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
+      <JFXTextField fx:id="name" focusColor="#1f8fe8" layoutX="10.0" layoutY="130.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="quantity" focusColor="#1f8fe8" layoutX="12.0" layoutY="200.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="unit" focusColor="#1f8fe8" layoutX="14.0" layoutY="270.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="supplier" focusColor="#1f8fe8" layoutX="14.0" layoutY="340.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="pricePerUnit" focusColor="#1f8fe8" layoutX="14.0" layoutY="410.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
    </children>
 </AnchorPane>

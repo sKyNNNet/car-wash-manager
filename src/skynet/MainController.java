@@ -63,8 +63,6 @@ public class MainController implements Initializable {
     @FXML
     TableColumn lastName;
     @FXML
-    TableColumn username;
-    @FXML
     TableColumn email;
     @FXML
     TableColumn rank;
@@ -80,6 +78,20 @@ public class MainController implements Initializable {
     TableColumn supplier;
     @FXML
     TableColumn pricePerUnit;
+
+    @FXML
+    TableView<User> accountsTableView;
+    @FXML
+    TableColumn accountFirstName;
+    @FXML
+    TableColumn accountLastName;
+    @FXML
+    TableColumn accountUsername;
+    @FXML
+    TableColumn accountEmail;
+    @FXML
+    TableColumn accountRank;
+
     @FXML
     Button dashboardAdd;
     @FXML
@@ -111,6 +123,7 @@ public class MainController implements Initializable {
         updateDashboard();
         updateEmployees();
         updateInventory();
+        updateAccounts();
 
         employeesTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         inventoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -202,7 +215,6 @@ public class MainController implements Initializable {
                                 controller.details.setText(e.getUsername() + " - #" + e.getId());
                                 controller.firstName.setText(e.getFirstName());
                                 controller.lastName.setText(e.getLastName());
-                                controller.username.setText(e.getUsername());
                                 controller.email.setText(e.getEmail());
 
                             }
@@ -252,7 +264,6 @@ public class MainController implements Initializable {
                                 controller.details.setText(e.getUsername() + " - #" + e.getId());
                                 controller.firstName.setText(e.getFirstName());
                                 controller.lastName.setText(e.getLastName());
-                                controller.username.setText(e.getUsername());
                                 controller.email.setText(e.getEmail());
 
                             }
@@ -389,7 +400,6 @@ public class MainController implements Initializable {
 
                 controller.firstName.setText(employee.getFirstName());
                 controller.lastName.setText(employee.getLastName());
-                controller.username.setText(employee.getUsername());
                 controller.email.setText(employee.getEmail());
 
                 if (employee.getRank().equals("CEO"))
@@ -505,7 +515,6 @@ public class MainController implements Initializable {
 
                 firstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
                 lastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-                username.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
                 email.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
                 rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
 
@@ -536,6 +545,24 @@ public class MainController implements Initializable {
                 pricePerUnit.setCellValueFactory(new PropertyValueFactory<Inventory, Double>("pricePerUnit"));
 
                 inventoryTable.setItems(data);
+            }
+        });
+    }
+
+    public void updateAccounts() {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                List<User> u = db.getUsers();
+
+                ObservableList<User> data = FXCollections.observableArrayList(u);
+
+                accountFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+                accountLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+                accountUsername.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
+                accountEmail.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
+                accountRank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
+
+                accountsTableView.setItems(data);
             }
         });
     }
@@ -572,15 +599,15 @@ public class MainController implements Initializable {
 
             LoggedInUserSettings controller = fxmlLoader.getController();
 
-            List<Employee> employees = db.getEmployees();
+            List<User> users = db.getUsers();
 
-            for(Employee e : employees){
-                if(e.getUsername().equals(userMenu.getText())){
+            for(User u : users){
+                if(u.getUsername().equals(userMenu.getText())){
                     controller.welcomeLabel.setText("Welcome " + userMenu.getText());
-                    controller.firstName.setText(e.getFirstName());
-                    controller.lastName.setText(e.getLastName());
-                    controller.email.setText(e.getEmail());
-                    controller.userIdLabel.setText(String.valueOf(e.getId()));
+                    controller.firstName.setText(u.getFirstName());
+                    controller.lastName.setText(u.getLastName());
+                    controller.email.setText(u.getEmail());
+                    controller.userIdLabel.setText(String.valueOf(u.getId()));
                 }
             }
 

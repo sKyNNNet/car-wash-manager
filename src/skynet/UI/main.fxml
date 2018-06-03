@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -97,7 +98,30 @@
                   </Label>
                </children>
             </HBox>
-            <VBox id="teamBox" maxWidth="1.7976931348623157E308" minHeight="345.0" prefHeight="345.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
+            <HBox id="inventoryButton" fx:id="usersListTab" onMouseClicked="#showInventoryTab" prefHeight="40.0" prefWidth="240.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/users.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="51.0" prefWidth="165.0" text="Accounts list" textFill="#e1e1e1">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox id="teamBox" fx:id="teamMembersVBox" maxWidth="1.7976931348623157E308" minHeight="290.0" prefHeight="290.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -122,7 +146,7 @@
             </VBox>
          </children>
       </VBox>
-      <VBox fx:id="dashboardVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="dashboardVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
                <children>
@@ -227,7 +251,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="employeesVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="employeesVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Employees" textFill="#616161">
                <font>
@@ -241,7 +265,6 @@
               <columns>
                 <TableColumn fx:id="firstName" prefWidth="100.0" text="First Name" />
                 <TableColumn fx:id="lastName" prefWidth="103.0" text="Last Name" />
-                  <TableColumn fx:id="username" prefWidth="71.0" text="Username" />
                   <TableColumn fx:id="email" prefWidth="193.0" text="Email" />
                   <TableColumn fx:id="rank" prefWidth="79.0" text="Rank" />
               </columns>
@@ -284,7 +307,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="inventoryVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="inventoryVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Inventory" textFill="#616161">
                <font>
@@ -341,7 +364,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="carWasherDashboard" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="carWasherDashboard" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
                <children>
@@ -355,65 +378,98 @@
                   </Label>
                </children>
             </HBox>
-            <VBox prefHeight="222.0" prefWidth="560.0">
+            <Pane prefHeight="526.0" prefWidth="560.0">
                <children>
-                  <HBox prefHeight="250.0" prefWidth="561.0">
+                  <Label layoutX="123.0" layoutY="236.0" text="You have no access to view information" textFill="#a1a1a1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="employeesVBox1" layoutX="-1.0" layoutY="-74.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
                      <children>
-                        <VBox prefHeight="269.0" prefWidth="280.0">
+                        <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Employees" textFill="#616161">
+                           <font>
+                              <Font name="Ebrima" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <TableView fx:id="employeesTable1" maxWidth="550.0" prefHeight="440.0">
+                           <columns>
+                              <TableColumn fx:id="firstName1" prefWidth="100.0" text="First Name" />
+                              <TableColumn fx:id="lastName1" prefWidth="103.0" text="Last Name" />
+                              <TableColumn fx:id="email1" prefWidth="193.0" text="Email" />
+                              <TableColumn fx:id="rank1" prefWidth="79.0" text="Rank" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                        </TableView>
+                        <HBox prefHeight="85.0" prefWidth="560.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #7fe1ff;" text="a" textFill="#515151">
+                              <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#employeeEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
                                  <font>
                                     <Font name="Ebrima Bold" size="14.0" />
                                  </font>
-                              </Label>
-                              <Label fx:id="carsWashedToday1" alignment="CENTER" prefHeight="218.0" prefWidth="280.0" style="-fx-background-color: #caeef9;" text="0" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="269.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #7fe1ff;" text="b" textFill="#515151">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets left="25.0" top="25.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewEmployee" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
                                  <font>
                                     <Font name="Ebrima Bold" size="14.0" />
                                  </font>
-                              </Label>
-                              <Label fx:id="carsWashedThisMonth1" alignment="CENTER" prefHeight="218.0" prefWidth="280.0" style="-fx-background-color: #caeef9;" text="0" />
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/addMember.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets left="210.0" top="25.0" />
+                                 </HBox.margin>
+                              </JFXButton>
                            </children>
-                        </VBox>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox prefHeight="217.0" prefWidth="560.0">
-               <children>
-                  <HBox prefHeight="276.0" prefWidth="561.0">
-                     <children>
-                        <VBox prefHeight="264.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #87ff9f;" text="c" textFill="#515151">
-                                 <font>
-                                    <Font name="Ebrima Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="moneyMadeToday1" alignment="CENTER" prefHeight="247.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="269.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #87ff9f;" text="d" textFill="#515151">
-                                 <font>
-                                    <Font name="Ebrima Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="moneyMadeThisMonth1" alignment="CENTER" prefHeight="246.0" prefWidth="280.0" style="-fx-background-color: #ddffe9;" text="0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            </Pane>
+         </children>
+      </VBox>
+      <VBox fx:id="accountsListVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Accounts List" textFill="#616161">
+               <font>
+                  <Font name="Ebrima" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="accountsTableView" maxWidth="550.0" prefHeight="440.0">
+               <columns>
+                  <TableColumn fx:id="accountFirstName" prefWidth="102.0" text="First Name" />
+                  <TableColumn fx:id="accountLastName" prefWidth="109.0" text="Last Name" />
+                  <TableColumn fx:id="accountUsername" prefWidth="103.0" text="Username" />
+                  <TableColumn fx:id="accountEmail" prefWidth="170.0" text="Email" />
+                  <TableColumn fx:id="accountRank" prefWidth="63.0" text="Rank" />
+               </columns>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#accountEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -424,7 +480,7 @@
                         <Insets left="25.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="addEmployee" fx:id="dashboardAdd1" alignment="CENTER" onMouseClicked="#addCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewAccount" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>

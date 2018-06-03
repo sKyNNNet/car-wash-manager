@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,70 +19,43 @@
             <Font name="Ebrima" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="176.0" text="Interior cleaning" textFill="#616161">
+      <Label layoutX="14.0" layoutY="176.0" text="Interior cleaning" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="246.0" text="Exterior cleaning" textFill="#616161">
+      <Label layoutX="14.0" layoutY="246.0" text="Exterior cleaning" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="316.0" text="Engine cleaning" textFill="#616161">
+      <Label layoutX="14.0" layoutY="316.0" text="Engine cleaning" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="456.0" text="Polishing &amp; waxing" textFill="#616161">
+      <Label layoutX="14.0" layoutY="456.0" text="Polishing &amp; waxing" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="386.0" text="Upholstery cleaning" textFill="#616161">
+      <Label layoutX="14.0" layoutY="386.0" text="Upholstery cleaning" textFill="#a1a1a1">
          <font>
-            <Font name="Ebrima Bold" size="14.0" />
+            <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
       <JFXButton id="addEmployee" alignment="CENTER" layoutX="137.0" layoutY="535.0" onMouseClicked="#saveSettingsButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../icons/addMember.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="interiorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="196.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="upholsteryCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="exteriorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="266.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="engineCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="336.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="polishingAndWaxing" focusColor="#1f8fe8" layoutX="14.0" layoutY="476.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXTextField>
+      <JFXTextField fx:id="interiorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="196.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="upholsteryCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="exteriorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="266.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="engineCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="336.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="polishingAndWaxing" focusColor="#1f8fe8" layoutX="14.0" layoutY="476.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
    </children>
 </AnchorPane>
