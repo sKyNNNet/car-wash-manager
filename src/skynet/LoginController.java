@@ -22,48 +22,62 @@ public class LoginController {
     @FXML TextField loginPassowrd;
     @FXML Button loginButton;
 
+    private Boolean disableLogin = false;
+
     @FXML
     public void login(ActionEvent event) throws IOException {
 
-        ((Node)event.getSource()).getScene().getWindow().hide();
+        if(disableLogin) {
+            ((Node) event.getSource()).getScene().getWindow().hide();
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("UI/main.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UI/main.fxml"));
 
-        Parent root = fxmlLoader.load();
+            Parent root = fxmlLoader.load();
 
-        MainController controller = fxmlLoader.getController();
+            MainController controller = fxmlLoader.getController();
 
-        controller.setUserMenuUsername(loginUsername.getText());
+            controller.setUserMenuUsername(loginUsername.getText());
 
-        Stage mainStage = new Stage();
-        Scene mainScene = new Scene(root);
-        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
-        mainStage.setResizable(false);
-        mainStage.setScene(mainScene);
-        mainStage.show();
-
-        /*
-        DatabaseConnection db = new DatabaseConnection();
-        boolean goodLogin = db.checkLogin(loginUsername.getText(), loginPassowrd.getText());
-
-        if(goodLogin){
-            ((Node)event.getSource()).getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(getClass().getResource("UI/main.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+        } else {
+            DatabaseConnection db = new DatabaseConnection();
+            boolean goodLogin = db.checkLogin(loginUsername.getText(), loginPassowrd.getText());
 
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Incorrect username or password!");
-            alert.showAndWait();
+            if(goodLogin){
+                ((Node) event.getSource()).getScene().getWindow().hide();
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("UI/main.fxml"));
+
+                Parent root = fxmlLoader.load();
+
+                MainController controller = fxmlLoader.getController();
+
+                controller.setUserMenuUsername(loginUsername.getText());
+
+                Stage mainStage = new Stage();
+                Scene mainScene = new Scene(root);
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.setResizable(false);
+                mainStage.setScene(mainScene);
+                mainStage.show();
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Incorrect username or password!");
+                alert.showAndWait();
+
+            }
         }
-        */
+
     }
 
     public void signUpButton(Event event){

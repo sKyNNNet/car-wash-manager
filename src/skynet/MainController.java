@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -94,6 +96,8 @@ public class MainController implements Initializable {
     MenuButton userMenu;
     @FXML
     JFXButton adminDashboardEditButton;
+
+    @FXML Label userIdLabel;
 
     private DatabaseConnection db = new DatabaseConnection();
     private String loginRank = "unranked";
@@ -182,13 +186,36 @@ public class MainController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("UI/userSettings.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("UI/userSettings.fxml"));
+
+                        Parent root = fxmlLoader.load();
+
+                        UserSettings controller = fxmlLoader.getController();
+
+                        controller.firstName.setText(name.split(" ")[0]);
+
+                        List<Employee> employees = db.getEmployees();
+
+                        for(Employee e : employees) {
+                            if(e.getFirstName().equals(name.split(" ")[0])){
+                                controller.details.setText(e.getUsername() + " - #" + e.getId());
+                                controller.firstName.setText(e.getFirstName());
+                                controller.lastName.setText(e.getLastName());
+                                controller.username.setText(e.getUsername());
+                                controller.email.setText(e.getEmail());
+
+                            }
+                        }
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
                         mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
                         mainStage.setResizable(false);
                         mainStage.setScene(mainScene);
                         mainStage.show();
+
+                        mainStage.focusedProperty().addListener((ov, t, t1) -> updateEmployees());
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -209,13 +236,36 @@ public class MainController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("UI/userSettings.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("UI/userSettings.fxml"));
+
+                        Parent root = fxmlLoader.load();
+
+                        UserSettings controller = fxmlLoader.getController();
+
+                        controller.firstName.setText(name.split(" ")[0]);
+
+                        List<Employee> employees = db.getEmployees();
+
+                        for(Employee e : employees) {
+                            if(e.getFirstName().equals(name.split(" ")[0])){
+                                controller.details.setText(e.getUsername() + " - #" + e.getId());
+                                controller.firstName.setText(e.getFirstName());
+                                controller.lastName.setText(e.getLastName());
+                                controller.username.setText(e.getUsername());
+                                controller.email.setText(e.getEmail());
+
+                            }
+                        }
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
                         mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
                         mainStage.setResizable(false);
                         mainStage.setScene(mainScene);
                         mainStage.show();
+
+                        //when we get back to the main window we refresh the stats
+                        mainStage.focusedProperty().addListener((ov, t, t1) -> updateEmployees());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -490,7 +540,7 @@ public class MainController implements Initializable {
         });
     }
 
-    public void logoutUser(Event event) {
+    public void logoutUser() {
         try {
 
             mainePane.getScene().getWindow().hide();
@@ -514,14 +564,25 @@ public class MainController implements Initializable {
     }
 
     public void openUserSettings() {
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("UI/userSettings.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("UI/loggedInUserSettings.fxml"));
 
             Parent root = fxmlLoader.load();
 
-            UserSettings controller = fxmlLoader.getController();
+            LoggedInUserSettings controller = fxmlLoader.getController();
+
+            List<Employee> employees = db.getEmployees();
+
+            for(Employee e : employees){
+                if(e.getUsername().equals(userMenu.getText())){
+                    controller.welcomeLabel.setText("Welcome " + userMenu.getText());
+                    controller.firstName.setText(e.getFirstName());
+                    controller.lastName.setText(e.getLastName());
+                    controller.email.setText(e.getEmail());
+                    controller.userIdLabel.setText(String.valueOf(e.getId()));
+                }
+            }
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
@@ -532,7 +593,6 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setUserMenuUsername(String username) {

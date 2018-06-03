@@ -129,6 +129,81 @@ public class DatabaseConnection {
         return rank;
     }
 
+    public String getPasswordById(int id){
+
+        connect();
+
+        String encryptedPassword = "a";
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql =  "SELECT password FROM users WHERE id=" + id + ";";
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                encryptedPassword = rset.getString("password");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return encryptedPassword;
+    }
+
+    public int getIdByUsername(String username){
+        connect();
+
+        int id = 0;
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql =  "SELECT id FROM users WHERE username='" + username + "';";
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                id = rset.getInt("id");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return id;
+
+    }
+
+    public String getUsernameById(int id){
+        connect();
+
+        String username = "username";
+
+        try{
+            stmt = connection.createStatement();
+
+            String sql =  "SELECT username FROM users WHERE id=" + id + ";";
+
+            stmt = connection.createStatement();
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                username = rset.getString("username");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return username;
+
+    }
+
     public void updatePrice(int id, String serviceType, Double priceValue){
         connect();
 
@@ -145,6 +220,23 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
 
+    }
+
+    public void updatePassword(int id, String password){
+        connect();
+
+        try {
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET password='" + password + "' "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public double getPriceByServiceType(String serviceType){
@@ -450,6 +542,57 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
 
+    }
+
+    public void updateUserSettings(int id, String firstName, String lastName, String email){
+        connect();
+
+        try {
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "' "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserSettings(int id, String firstName, String lastName, String username, String email, String password){
+        connect();
+
+        try {
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', username='" + username +"', password='" + password + "' "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserSettings(int id, String firstName, String lastName, String username, String email){
+        connect();
+
+        try {
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', username='" + username + "' "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteById(String tableName, int id){

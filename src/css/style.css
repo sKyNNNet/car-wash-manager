@@ -42,7 +42,6 @@
     -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.4) , 10,0,1,1.5 );
 }
 
-
 .memberVBox {
     -fx-padding: 15 0 0 10;
 }
