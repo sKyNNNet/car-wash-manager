@@ -543,8 +543,8 @@ public class MainController implements Initializable {
                 carsWashedToday.setText(db.carsWashed(db.sqlToday));
                 carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
 
-                moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString());
-                moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString());
+                moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString() + "$");
+                moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString() + "$");
             }
         });
     }

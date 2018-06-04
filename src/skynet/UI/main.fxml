@@ -251,7 +251,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="employeesVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="employeesVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Employees" textFill="#616161">
                <font>
@@ -307,7 +307,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="inventoryVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="inventoryVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Inventory" textFill="#616161">
                <font>
@@ -364,7 +364,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="accountsListVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="accountsListVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Accounts List" textFill="#616161">
                <font>
@@ -421,7 +421,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="noPower" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="noPower" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
                <children>
