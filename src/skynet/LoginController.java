@@ -95,4 +95,23 @@ public class LoginController {
         }
 
     }
+
+    public void forgotPasswordClick(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UI/forgotPassword.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            Stage mainStage = new Stage();
+            Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.setResizable(false);
+            mainStage.setScene(mainScene);
+            mainStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
