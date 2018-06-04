@@ -562,8 +562,48 @@ public class DatabaseConnection {
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
             String sql =    "UPDATE employees "
-                            + "SET id=" + id + ", username='" + username + "', " + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                            + "SET id=" + id + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
                             + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void editAccount(int id,String username, String password, String firstName, String lastName, String email, String rank){
+        connect();
+
+        try {
+
+            //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET id=" + id + ", username='" + username + "', " + "'password='" + password + "', firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                    + "WHERE id=" + id +";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void editAccount(int id,String username, String firstName, String lastName, String email, String rank){
+        connect();
+
+        try {
+
+            //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
+            stmt = connection.createStatement();
+            String sql =    "UPDATE users "
+                    + "SET id=" + id + ", username='" + username + "', firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                    + "WHERE id=" + id +";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);

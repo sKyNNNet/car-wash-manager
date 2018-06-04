@@ -26,7 +26,6 @@ public class EditEmployeeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
         //allow only letter for first name / last name
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {

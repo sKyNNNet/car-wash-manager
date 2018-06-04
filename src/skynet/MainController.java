@@ -5,13 +5,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -23,7 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,7 +34,7 @@ public class MainController implements Initializable {
     @FXML
     HBox dashboardTab;
     @FXML
-    VBox carWasherDashboard;
+    VBox noPower;
     @FXML
     HBox employeesTab;
     @FXML
@@ -48,6 +45,8 @@ public class MainController implements Initializable {
     VBox employeesVBox;
     @FXML
     VBox inventoryVBox;
+    @FXML
+    VBox accountsListVBox;
     @FXML
     Label carsWashedToday;
     @FXML
@@ -109,13 +108,15 @@ public class MainController implements Initializable {
     @FXML
     JFXButton adminDashboardEditButton;
 
-    @FXML Label userIdLabel;
+    @FXML
+    Label userIdLabel;
 
     private DatabaseConnection db = new DatabaseConnection();
     private String loginRank = "unranked";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        restrictUsage();
         //display dashboard when we login
         showDashboardTab();
 
@@ -210,9 +211,9 @@ public class MainController implements Initializable {
 
                         List<Employee> employees = db.getEmployees();
 
-                        for(Employee e : employees) {
-                            if(e.getFirstName().equals(name.split(" ")[0])){
-                                controller.details.setText(e.getUsername() + " - #" + e.getId());
+                        for (Employee e : employees) {
+                            if (e.getFirstName().equals(name.split(" ")[0])) {
+                                controller.details.setText(name + " - #" + e.getId());
                                 controller.firstName.setText(e.getFirstName());
                                 controller.lastName.setText(e.getLastName());
                                 controller.email.setText(e.getEmail());
@@ -259,8 +260,8 @@ public class MainController implements Initializable {
 
                         List<Employee> employees = db.getEmployees();
 
-                        for(Employee e : employees) {
-                            if(e.getFirstName().equals(name.split(" ")[0])){
+                        for (Employee e : employees) {
+                            if (e.getFirstName().equals(name.split(" ")[0])) {
                                 controller.details.setText(e.getUsername() + " - #" + e.getId());
                                 controller.firstName.setText(e.getFirstName());
                                 controller.lastName.setText(e.getLastName());
@@ -430,73 +431,115 @@ public class MainController implements Initializable {
     }
 
     public void dashboardSettingsButton() {
-        try {
-            DatabaseConnection db = new DatabaseConnection();
+        if (loginRank.equals("CEO")) {
+            try {
+                DatabaseConnection db = new DatabaseConnection();
 
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("UI/settings.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("UI/settings.fxml"));
 
-            Parent root = fxmlLoader.load();
+                Parent root = fxmlLoader.load();
 
-            SettingsController controller = fxmlLoader.getController();
+                SettingsController controller = fxmlLoader.getController();
 
-            controller.interiorCleaning.setText(String.valueOf(db.getPriceByServiceType("interiorCleaning")));
-            controller.exteriorCleaning.setText(String.valueOf(db.getPriceByServiceType("exteriorCleaning")));
-            controller.engineCleaning.setText(String.valueOf(db.getPriceByServiceType("engineCleaning")));
-            controller.polishingAndWaxing.setText(String.valueOf(db.getPriceByServiceType("polishingAndWaxing")));
-            controller.upholsteryCleaning.setText(String.valueOf(db.getPriceByServiceType("upholsteryCleaning")));
+                controller.interiorCleaning.setText(String.valueOf(db.getPriceByServiceType("interiorCleaning")));
+                controller.exteriorCleaning.setText(String.valueOf(db.getPriceByServiceType("exteriorCleaning")));
+                controller.engineCleaning.setText(String.valueOf(db.getPriceByServiceType("engineCleaning")));
+                controller.polishingAndWaxing.setText(String.valueOf(db.getPriceByServiceType("polishingAndWaxing")));
+                controller.upholsteryCleaning.setText(String.valueOf(db.getPriceByServiceType("upholsteryCleaning")));
 
-            Stage mainStage = new Stage();
-            Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
-            mainStage.setResizable(false);
-            mainStage.setScene(mainScene);
-            mainStage.show();
+                Stage mainStage = new Stage();
+                Scene mainScene = new Scene(root);
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.setResizable(false);
+                mainStage.setScene(mainScene);
+                mainStage.show();
 
-            //when we get back to the main window we refresh the stats
-            mainStage.focusedProperty().addListener((ov, t, t1) -> updateInventory());
+                //when we get back to the main window we refresh the stats
+                mainStage.focusedProperty().addListener((ov, t, t1) -> updateInventory());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        } else {
+            new Popup(Alert.AlertType.WARNING, "Error", "Only the CEO can modify these settings.");
+            return;
         }
-
-
     }
 
     //tab switcher
     public void showDashboardTab() {
-        dashboardVBox.setVisible(true);
-        employeesVBox.setVisible(false);
-        inventoryVBox.setVisible(false);
+        if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            dashboardVBox.setVisible(true);
+            employeesVBox.setVisible(false);
+            inventoryVBox.setVisible(false);
+            accountsListVBox.setVisible(false);
 
-        dashboardTab.setStyle(activeSelection);
-        employeesTab.setStyle(inactiveSelection);
-        inventoryTab.setStyle(inactiveSelection);
+            dashboardTab.setStyle(activeSelection);
+            employeesTab.setStyle(inactiveSelection);
+            inventoryTab.setStyle(inactiveSelection);
+            accountsListVBox.setStyle(inactiveSelection);
+        } else {
+            showRestrictedUsage();
+        }
     }
 
     public void showEmployeesTab() {
-        dashboardVBox.setVisible(false);
-        employeesVBox.setVisible(true);
-        inventoryVBox.setVisible(false);
+        if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            dashboardVBox.setVisible(false);
+            employeesVBox.setVisible(true);
+            inventoryVBox.setVisible(false);
+            accountsListVBox.setVisible(false);
 
-        dashboardTab.setStyle(inactiveSelection);
-        employeesTab.setStyle(activeSelection);
-        inventoryTab.setStyle(inactiveSelection);
+            dashboardTab.setStyle(inactiveSelection);
+            employeesTab.setStyle(activeSelection);
+            inventoryTab.setStyle(inactiveSelection);
+            accountsListVBox.setStyle(inactiveSelection);
+        } else {
+            showRestrictedUsage();
+        }
     }
 
     public void showInventoryTab() {
-        dashboardVBox.setVisible(false);
-        employeesVBox.setVisible(false);
-        inventoryVBox.setVisible(true);
+        if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            dashboardVBox.setVisible(false);
+            employeesVBox.setVisible(false);
+            inventoryVBox.setVisible(true);
+            accountsListVBox.setVisible(false);
 
-        dashboardTab.setStyle(inactiveSelection);
-        employeesTab.setStyle(inactiveSelection);
-        inventoryTab.setStyle(activeSelection);
+            dashboardTab.setStyle(inactiveSelection);
+            employeesTab.setStyle(inactiveSelection);
+            inventoryTab.setStyle(activeSelection);
+            accountsListVBox.setStyle(inactiveSelection);
+        } else {
+            showRestrictedUsage();
+        }
+    }
+
+    public void showAccountsListTab() {
+
+        if (loginRank.equals("CEO")) {
+            dashboardVBox.setVisible(false);
+            employeesVBox.setVisible(false);
+            inventoryVBox.setVisible(false);
+            accountsListVBox.setVisible(true);
+
+            dashboardTab.setStyle(inactiveSelection);
+            employeesTab.setStyle(inactiveSelection);
+            inventoryTab.setStyle(inactiveSelection);
+            accountsListVBox.setStyle(activeSelection);
+        } else {
+            showRestrictedUsage();
+        }
+
     }
 
     public void updateDashboard() {
         Platform.runLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 carsWashedToday.setText(db.carsWashed(db.sqlToday));
                 carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
 
@@ -508,7 +551,8 @@ public class MainController implements Initializable {
 
     public void updateEmployees() {
         Platform.runLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 List<Employee> e = db.getEmployees();
 
                 ObservableList<Employee> data = FXCollections.observableArrayList(e);
@@ -533,7 +577,8 @@ public class MainController implements Initializable {
 
     public void updateInventory() {
         Platform.runLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 List<Inventory> i = db.getInventory();
 
                 ObservableList<Inventory> data = FXCollections.observableArrayList(i);
@@ -551,7 +596,8 @@ public class MainController implements Initializable {
 
     public void updateAccounts() {
         Platform.runLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 List<User> u = db.getUsers();
 
                 ObservableList<User> data = FXCollections.observableArrayList(u);
@@ -601,8 +647,8 @@ public class MainController implements Initializable {
 
             List<User> users = db.getUsers();
 
-            for(User u : users){
-                if(u.getUsername().equals(userMenu.getText())){
+            for (User u : users) {
+                if (u.getUsername().equals(userMenu.getText())) {
                     controller.welcomeLabel.setText("Welcome " + userMenu.getText());
                     controller.firstName.setText(u.getFirstName());
                     controller.lastName.setText(u.getLastName());
@@ -622,6 +668,69 @@ public class MainController implements Initializable {
         }
     }
 
+    public void accountEditButton() {
+        User user = accountsTableView.getSelectionModel().getSelectedItem();
+
+        if (user != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("UI/editAccount.fxml"));
+
+                Parent root = fxmlLoader.load();
+
+                EditAccountController controller = fxmlLoader.getController();
+
+                controller.firstName.setText(user.getFirstName());
+                controller.lastName.setText(user.getLastName());
+                controller.username.setText(user.getUsername());
+                controller.email.setText(user.getEmail());
+
+                if (user.getRank().equals("CEO"))
+                    controller.rank.getSelectionModel().select(0);
+                else if (user.getRank().equals("Assistant"))
+                    controller.rank.getSelectionModel().select(1);
+                else if (user.getRank().equals("Car Washer"))
+                    controller.rank.getSelectionModel().select(2);
+                else
+                    controller.rank.getSelectionModel().select(3);
+
+                controller.editAccountTextTitle.setText("Edit Account #" + user.getId());
+
+                Stage mainStage = new Stage();
+                Scene mainScene = new Scene(root);
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.setResizable(false);
+                mainStage.setScene(mainScene);
+                mainStage.show();
+
+                //when we get back to the main window we refresh the stats
+                mainStage.focusedProperty().addListener((ov, t, t1) -> updateAccounts());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addNewAccount() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("UI/addNewAccount.fxml"));
+            Stage mainStage = new Stage();
+            Scene mainScene = new Scene(root);
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.setResizable(false);
+            mainStage.setScene(mainScene);
+            mainStage.show();
+
+            //when we get back to the main window we refresh the stats
+            mainStage.focusedProperty().addListener((ov, t, t1) -> updateAccounts());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void setUserMenuUsername(String username) {
         userMenu.setText(username);
         loginRank = db.getRankByUsername(userMenu.getText());
@@ -631,15 +740,23 @@ public class MainController implements Initializable {
         restrictUsage();
     }
 
-    public void restrictUsage(){
-        if(loginRank.equals("Car Washer")){
+    public void restrictUsage() {
+        if (loginRank.equals("Car Washer") || loginRank.equals("unranked")) {
             dashboardVBox.setVisible(false);
-            carWasherDashboard.setVisible(true);
+            noPower.setVisible(true);
         }
 
-        if(loginRank.equals("CEO")){
+        if (loginRank.equals("CEO")) {
             dashboardVBox.setVisible(true);
-            carWasherDashboard.setVisible(false);
+            noPower.setVisible(false);
         }
+    }
+
+    public void showRestrictedUsage(){
+        dashboardVBox.setVisible(false);
+        employeesVBox.setVisible(false);
+        inventoryVBox.setVisible(false);
+        accountsListVBox.setVisible(false);
+        noPower.setVisible(true);
     }
 }
