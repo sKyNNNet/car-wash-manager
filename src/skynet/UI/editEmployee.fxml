@@ -51,7 +51,7 @@
             <Font name="Ebrima" size="12.0" />
          </font>
       </JFXTextField>
-      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="184.0" layoutY="369.0" onMouseClicked="#editEmployeeSaveButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
+      <JFXButton id="addEmployee" fx:id="addButton" alignment="CENTER" layoutX="184.0" layoutY="369.0" onMouseClicked="#editEmployeeSaveButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>
@@ -59,7 +59,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton id="addEmployee" fx:id="addButton1" alignment="CENTER" layoutX="14.0" layoutY="369.0" onMouseClicked="#editEmployeeDeleteButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Delete">
+      <JFXButton id="addEmployee" fx:id="addButton1" alignment="CENTER" layoutX="14.0" layoutY="369.0" onMouseClicked="#editEmployeeDeleteButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Delete">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

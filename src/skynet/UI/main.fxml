@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.MainController">
+<AnchorPane fx:id="mainePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.MainController">
    <children>
       <VBox fx:id="leftPanelVBox" prefHeight="600.0" prefWidth="240.0" style="-fx-background-color: #333645;">
          <children>
@@ -33,7 +33,7 @@
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/dashboard.png" />
+                        <Image url="@../icons/dashboard.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -56,7 +56,7 @@
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/employs.png" />
+                        <Image url="@../icons/employs.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -82,7 +82,7 @@
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/inventory.png" />
+                        <Image url="@../icons/inventory.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -98,11 +98,11 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="inventoryButton" fx:id="usersListTab" onMouseClicked="#showAccountsListTab" prefHeight="40.0" prefWidth="240.0">
+            <HBox id="inventoryButton" fx:id="accountsListTab" onMouseClicked="#showAccountsListTab" prefHeight="40.0" prefWidth="240.0">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/users.png" />
+                        <Image url="@../icons/users.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -121,7 +121,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </HBox>
-            <VBox id="teamBox" fx:id="teamMembersVBox" maxWidth="1.7976931348623157E308" minHeight="290.0" prefHeight="290.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../../css/style.css">
+            <VBox id="teamBox" fx:id="teamMembersVBox" maxWidth="1.7976931348623157E308" minHeight="290.0" prefHeight="290.0" prefWidth="240.0" styleClass="teamBox" stylesheets="@../css/style.css">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -148,7 +148,7 @@
       </VBox>
       <VBox fx:id="dashboardVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
-            <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
+            <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../css/style.css">
                <children>
                   <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="217.0" text="Dashboard" textFill="#616161">
                      <font>
@@ -218,7 +218,7 @@
             </VBox>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" fx:id="adminDashboardEditButton" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" fx:id="adminDashboardEditButton" alignment="CENTER" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -229,14 +229,14 @@
                         <Insets left="25.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="addEmployee" fx:id="dashboardAdd" alignment="CENTER" onMouseClicked="#addCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                  <JFXButton id="addEmployee" fx:id="dashboardAdd" alignment="CENTER" onMouseClicked="#addCarWash" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Add New">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/addMember.png" />
+                              <Image url="@../icons/addMember.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -251,7 +251,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="employeesVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="employeesVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Employees" textFill="#616161">
                <font>
@@ -274,7 +274,7 @@
             </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#employeeEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#employeeEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -285,14 +285,14 @@
                         <Insets left="25.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewEmployee" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewEmployee" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Add New">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/addMember.png" />
+                              <Image url="@../icons/addMember.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -307,7 +307,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="inventoryVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="inventoryVBox" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Inventory" textFill="#616161">
                <font>
@@ -331,7 +331,7 @@
             </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#inventoryEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#inventoryEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -342,14 +342,14 @@
                         <Insets left="25.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewItem" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewItem" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Add New">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/addMember.png" />
+                              <Image url="@../icons/addMember.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -364,7 +364,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="accountsListVBox" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="accountsListVBox" layoutX="240.0" prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: #e8e8e8;">
          <children>
             <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;" text="Accounts List" textFill="#616161">
                <font>
@@ -388,7 +388,7 @@
             </TableView>
             <HBox prefHeight="85.0" prefWidth="560.0">
                <children>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#accountEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Edit">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#accountEditButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Edit">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
@@ -399,14 +399,14 @@
                         <Insets left="25.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewAccount" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Add New">
+                  <JFXButton id="addEmployee" alignment="CENTER" onMouseClicked="#addNewAccount" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Add New">
                      <font>
                         <Font name="Ebrima Bold" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../icons/addMember.png" />
+                              <Image url="@../icons/addMember.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -421,9 +421,9 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="noPower" layoutX="240.0" opacity="0.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
+      <VBox fx:id="noPower" layoutX="240.0" prefHeight="600.0" prefWidth="560.0" style="-fx-background-color: #e8e8e8;">
          <children>
-            <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../../css/style.css">
+            <HBox prefHeight="75.0" prefWidth="200.0" stylesheets="@../css/style.css">
                <children>
                   <Label contentDisplay="CENTER" prefHeight="75.0" prefWidth="217.0" text="Dashboard" textFill="#616161">
                      <font>
@@ -450,7 +450,7 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="700.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/settings.png" />
+                  <Image url="@../icons/settings.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />

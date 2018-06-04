@@ -41,7 +41,7 @@ public class LoginController {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -63,7 +63,7 @@ public class LoginController {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
-                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -105,7 +105,7 @@ public class LoginController {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();

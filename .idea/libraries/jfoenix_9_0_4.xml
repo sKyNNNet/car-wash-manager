@@ -1,7 +1,10 @@
 <component name="libraryTable">
   <library name="jfoenix-9.0.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/libs/jfoenix-9.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/skynet/libs/jfoenix-9.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/skynet/libs/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/skynet/libs/jasypt-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/skynet/libs/mysql-connector-java-8.0.11.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -44,7 +44,7 @@
             <Font name="Ebrima Bold" size="12.0" />
          </font>
       </Label>
-      <JFXButton id="addEmployee" alignment="CENTER" layoutX="137.0" layoutY="535.0" onMouseClicked="#saveSettingsButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../../css/style.css" text="Save">
+      <JFXButton id="addEmployee" alignment="CENTER" layoutX="137.0" layoutY="535.0" onMouseClicked="#saveSettingsButton" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="Save">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

@@ -40,6 +40,8 @@ public class MainController implements Initializable {
     @FXML
     HBox inventoryTab;
     @FXML
+    HBox accountsListTab;
+    @FXML
     VBox dashboardVBox;
     @FXML
     VBox employeesVBox;
@@ -146,10 +148,10 @@ public class MainController implements Initializable {
         ImageView icon = new ImageView();
         ImageView editUserInfoImgView = new ImageView();
 
-        Image ceo = new Image("icons/ceo.png");
-        Image assistant = new Image("icons/assistant.png");
-        Image carWasher = new Image("icons/worker.png");
-        Image editUserInfoImg = new Image("icons/editEmployeeInfo3.png");
+        Image ceo = new Image("skynet/icons/ceo.png");
+        Image assistant = new Image("skynet/icons/assistant.png");
+        Image carWasher = new Image("skynet/icons/worker.png");
+        Image editUserInfoImg = new Image("skynet/icons/editEmployeeInfo3.png");
 
 
         Button editUserInfoButton = new Button();
@@ -222,7 +224,7 @@ public class MainController implements Initializable {
                         }
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
-                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                         mainStage.setResizable(false);
                         mainStage.setScene(mainScene);
                         mainStage.show();
@@ -271,7 +273,7 @@ public class MainController implements Initializable {
                         }
                         Stage mainStage = new Stage();
                         Scene mainScene = new Scene(root);
-                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                         mainStage.setResizable(false);
                         mainStage.setScene(mainScene);
                         mainStage.show();
@@ -299,7 +301,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addCarWash.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -318,7 +320,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewEmployee.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -336,7 +338,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewItem.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -372,7 +374,7 @@ public class MainController implements Initializable {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
-                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -416,7 +418,7 @@ public class MainController implements Initializable {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
-                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -450,7 +452,7 @@ public class MainController implements Initializable {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
-                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -480,7 +482,7 @@ public class MainController implements Initializable {
             dashboardTab.setStyle(activeSelection);
             employeesTab.setStyle(inactiveSelection);
             inventoryTab.setStyle(inactiveSelection);
-            accountsListVBox.setStyle(inactiveSelection);
+            accountsListTab.setStyle(inactiveSelection);
         } else {
             showRestrictedUsage();
         }
@@ -496,7 +498,7 @@ public class MainController implements Initializable {
             dashboardTab.setStyle(inactiveSelection);
             employeesTab.setStyle(activeSelection);
             inventoryTab.setStyle(inactiveSelection);
-            accountsListVBox.setStyle(inactiveSelection);
+            accountsListTab.setStyle(inactiveSelection);
         } else {
             showRestrictedUsage();
         }
@@ -512,7 +514,7 @@ public class MainController implements Initializable {
             dashboardTab.setStyle(inactiveSelection);
             employeesTab.setStyle(inactiveSelection);
             inventoryTab.setStyle(activeSelection);
-            accountsListVBox.setStyle(inactiveSelection);
+            accountsListTab.setStyle(inactiveSelection);
         } else {
             showRestrictedUsage();
         }
@@ -529,7 +531,7 @@ public class MainController implements Initializable {
             dashboardTab.setStyle(inactiveSelection);
             employeesTab.setStyle(inactiveSelection);
             inventoryTab.setStyle(inactiveSelection);
-            accountsListVBox.setStyle(activeSelection);
+            accountsListTab.setStyle(activeSelection);
         } else {
             showRestrictedUsage();
         }
@@ -625,7 +627,7 @@ public class MainController implements Initializable {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -659,7 +661,7 @@ public class MainController implements Initializable {
 
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();
@@ -698,7 +700,7 @@ public class MainController implements Initializable {
 
                 Stage mainStage = new Stage();
                 Scene mainScene = new Scene(root);
-                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+                mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
                 mainStage.setResizable(false);
                 mainStage.setScene(mainScene);
                 mainStage.show();
@@ -717,7 +719,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewAccount.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
-            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+            mainStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
             mainStage.setResizable(false);
             mainStage.setScene(mainScene);
             mainStage.show();

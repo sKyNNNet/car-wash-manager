@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.LoginController">
+<Pane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skynet.LoginController">
    <children>
       <ImageView fitHeight="426.0" fitWidth="436.0" layoutX="87.0" layoutY="-82.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../logo/logo.jpg" />
+            <Image url="@../logo/logo.jpg" />
          </image>
       </ImageView>
-      <Button id="loginButton" fx:id="loginButton" layoutX="186.0" layoutY="339.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="194.0" styleClass="loginButton" stylesheets="@../../css/style.css" text="Login">
+      <Button id="loginButton" fx:id="loginButton" layoutX="186.0" layoutY="339.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="194.0" styleClass="loginButton" stylesheets="@../css/style.css" text="Login">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>

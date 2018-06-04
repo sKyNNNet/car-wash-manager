@@ -9,10 +9,10 @@ public class Popup {
     public Popup(Alert.AlertType type, String title, String context){
         Alert alert = new Alert(type);
 
-        //set the logo
+        //set the skynet.logo
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(
-                new Image(this.getClass().getResource("../logo/appicon.png").toString()));
+                new Image(this.getClass().getResource("logo/appicon.png").toString()));
 
         alert.setTitle(title);
         alert.setHeaderText(null);

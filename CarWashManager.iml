@@ -52,5 +52,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jfoenix-9.0.4" level="project" />
+    <orderEntry type="library" name="jasypt" level="project" />
   </component>
 </module>

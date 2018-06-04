@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("UI/login.fxml"));
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../logo/appicon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("logo/appicon.png")));
         primaryStage.setTitle("Car Wash Manager");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
