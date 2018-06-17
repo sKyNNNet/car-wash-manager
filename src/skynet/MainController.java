@@ -1,7 +1,6 @@
 package skynet;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -539,80 +538,68 @@ public class MainController implements Initializable {
     }
 
     public void updateDashboard() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                carsWashedToday.setText(db.carsWashed(db.sqlToday));
-                carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
 
-                moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString() + "$");
-                moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString() + "$");
-            }
-        });
+        carsWashedToday.setText(db.carsWashed(db.sqlToday));
+        carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
+
+        moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString() + "$");
+        moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString() + "$");
+
     }
 
     public void updateEmployees() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                List<Employee> e = db.getEmployees();
 
-                ObservableList<Employee> data = FXCollections.observableArrayList(e);
+        List<Employee> e = db.getEmployees();
 
-                firstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-                lastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-                email.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
-                rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
+        ObservableList<Employee> data = FXCollections.observableArrayList(e);
 
-                employeesTable.setItems(data);
+        firstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
+        rank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
 
-                teamMembersVBox.getChildren().clear();
+        employeesTable.setItems(data);
 
-                for (Employee emp : e) {
-                    String fullName = emp.getFirstName() + " " + emp.getLastName();
-                    addTeamMemberToLayout(fullName, emp.getRank());
+        teamMembersVBox.getChildren().clear();
 
-                }
-            }
-        });
+        for (Employee emp : e) {
+            String fullName = emp.getFirstName() + " " + emp.getLastName();
+            addTeamMemberToLayout(fullName, emp.getRank());
+
+        }
+
     }
 
     public void updateInventory() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                List<Inventory> i = db.getInventory();
 
-                ObservableList<Inventory> data = FXCollections.observableArrayList(i);
+        List<Inventory> i = db.getInventory();
 
-                name.setCellValueFactory(new PropertyValueFactory<Inventory, String>("name"));
-                quantity.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("quantity"));
-                unit.setCellValueFactory(new PropertyValueFactory<Inventory, String>("unit"));
-                supplier.setCellValueFactory(new PropertyValueFactory<Inventory, String>("supplier"));
-                pricePerUnit.setCellValueFactory(new PropertyValueFactory<Inventory, Double>("pricePerUnit"));
+        ObservableList<Inventory> data = FXCollections.observableArrayList(i);
 
-                inventoryTable.setItems(data);
-            }
-        });
+        name.setCellValueFactory(new PropertyValueFactory<Inventory, String>("name"));
+        quantity.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("quantity"));
+        unit.setCellValueFactory(new PropertyValueFactory<Inventory, String>("unit"));
+        supplier.setCellValueFactory(new PropertyValueFactory<Inventory, String>("supplier"));
+        pricePerUnit.setCellValueFactory(new PropertyValueFactory<Inventory, Double>("pricePerUnit"));
+
+        inventoryTable.setItems(data);
+
     }
 
     public void updateAccounts() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                List<User> u = db.getUsers();
 
-                ObservableList<User> data = FXCollections.observableArrayList(u);
+        List<User> u = db.getUsers();
 
-                accountFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
-                accountLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-                accountUsername.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
-                accountEmail.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
-                accountRank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
+        ObservableList<User> data = FXCollections.observableArrayList(u);
 
-                accountsTableView.setItems(data);
-            }
-        });
+        accountFirstName.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
+        accountLastName.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
+        accountUsername.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
+        accountEmail.setCellValueFactory(new PropertyValueFactory<Employee, String>("email"));
+        accountRank.setCellValueFactory(new PropertyValueFactory<Employee, String>("rank"));
+
+        accountsTableView.setItems(data);
+
     }
 
     public void logoutUser() {
@@ -754,7 +741,7 @@ public class MainController implements Initializable {
         }
     }
 
-    public void showRestrictedUsage(){
+    public void showRestrictedUsage() {
         dashboardVBox.setVisible(false);
         employeesVBox.setVisible(false);
         inventoryVBox.setVisible(false);

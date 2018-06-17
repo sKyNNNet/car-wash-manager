@@ -66,7 +66,7 @@ public class EditEmployeeController implements Initializable {
     public void editEmployeeDeleteButton(Event event){
         int id = Integer.parseInt(editEmployeeTextTitle.getText().split("#")[1]);
 
-        db.deleteById("employee", id);
+        db.deleteById("employees", id);
 
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }

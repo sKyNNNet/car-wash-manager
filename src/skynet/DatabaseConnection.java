@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DatabaseConnection {
 
-    private String url = "jdbc:mysql://db4free.net:3307/carwashmanager?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://db4free.net:3306/carwashmanager?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private String username = "darklight";
     private String password = "darklight1337";
     private Connection connection;
