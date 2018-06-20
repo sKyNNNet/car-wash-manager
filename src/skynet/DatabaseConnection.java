@@ -1,6 +1,13 @@
 package skynet;
 
-import java.sql.*;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,36 +16,40 @@ import java.util.List;
 
 public class DatabaseConnection {
 
-    private String url = "jdbc:mysql://db4free.net:3306/carwashmanager?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private String username = "darklight";
-    private String password = "darklight1337";
-    private Connection connection;
-    private Statement stmt;
-
-
-
+    private static String url = "jdbc:mysql://db4free.net:3306/carwashmanager?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String username = "darklight";
+    private static String password = "darklight1337";
+    private static Connection connection = null;
+    private static Statement stmt = null;
+    private static DataSource datasource = null;
     public String sqlToday = "DAY(date)=DAY(NOW())";
     public String sqlThisMonth = "MONTH(date)=MONTH(NOW());";
 
+    public static DataSource getDataSource() {
+        if (datasource == null) {
 
-    public void connect() {
-        System.out.println("Connecting database...");
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(url);
+            config.setUsername(username);
+            config.setPassword(password);
+            config.setMaximumPoolSize(10);
+            config.addDataSourceProperty("cachePrepStmts", "true");
+            config.addDataSourceProperty("prepStmtCacheSize", "250");
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            datasource = new HikariDataSource(config);
         }
 
+        return datasource;
     }
+
 
     public boolean checkLogin(String username, String password) {
         Crypt crypt = new Crypt();
 
-        connect();
-
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String sqlPassowrd = "SELECT password FROM carwashmanager.users WHERE username='" + username + "';";
@@ -67,18 +78,31 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return false;
     }
 
     public void addUser(String username, String password, String firstName, String lastName, String email, String rank) {
-        connect();
-
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "INSERT INTO users " +
-                    "VALUES (null, '" + username + "', '" + password + "', '" +firstName + "', '" +lastName +"', '" + email + "', '" + rank + "')";
+                    "VALUES (null, '" + username + "', '" + password + "', '" + firstName + "', '" + lastName + "', '" + email + "', '" + rank + "')";
 
             stmt.executeUpdate(sql);
 
@@ -102,16 +126,15 @@ public class DatabaseConnection {
 
     }
 
-    public String getRankByUsername(String username){
-
-        connect();
-
+    public String getRankByUsername(String username) {
         String rank = "unranked";
 
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sql =  "SELECT `rank` FROM users WHERE username='" + username + "';";
+            String sql = "SELECT `rank` FROM users WHERE username='" + username + "';";
 
             System.out.println(sql);
 
@@ -123,8 +146,21 @@ public class DatabaseConnection {
             while (rset.next()) {
                 rank = rset.getString("rank");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         System.out.println("db rank:" + rank);
@@ -132,16 +168,15 @@ public class DatabaseConnection {
         return rank;
     }
 
-    public String getPasswordById(int id){
-
-        connect();
-
+    public String getPasswordById(int id) {
         String encryptedPassword = "a";
 
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sql =  "SELECT password FROM users WHERE id=" + id + ";";
+            String sql = "SELECT password FROM users WHERE id=" + id + ";";
 
             stmt = connection.createStatement();
             ResultSet rset = stmt.executeQuery(sql);
@@ -149,23 +184,36 @@ public class DatabaseConnection {
             while (rset.next()) {
                 encryptedPassword = rset.getString("password");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
 
         return encryptedPassword;
     }
 
-    public int getIdByUsername(String username){
-        connect();
-
+    public int getIdByUsername(String username) {
         int id = 0;
 
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sql =  "SELECT id FROM users WHERE username='" + username + "';";
+            String sql = "SELECT id FROM users WHERE username='" + username + "';";
 
             stmt = connection.createStatement();
             ResultSet rset = stmt.executeQuery(sql);
@@ -173,8 +221,21 @@ public class DatabaseConnection {
             while (rset.next()) {
                 id = rset.getInt("id");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
 
@@ -182,15 +243,15 @@ public class DatabaseConnection {
 
     }
 
-    public String getUsernameById(int id){
-        connect();
-
+    public String getUsernameById(int id) {
         String username = "username";
 
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sql =  "SELECT username FROM users WHERE id=" + id + ";";
+            String sql = "SELECT username FROM users WHERE id=" + id + ";";
 
             stmt = connection.createStatement();
             ResultSet rset = stmt.executeQuery(sql);
@@ -198,8 +259,21 @@ public class DatabaseConnection {
             while (rset.next()) {
                 username = rset.getString("username");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
 
@@ -207,50 +281,76 @@ public class DatabaseConnection {
 
     }
 
-    public void updatePrice(int id, String serviceType, Double priceValue){
-        connect();
-
+    public void updatePrice(int id, String serviceType, Double priceValue) {
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
-            String sql =    "UPDATE prices "
+            String sql = "UPDATE prices "
                     + "SET id=" + id + ", serviceType='" + serviceType + "', " + "priceValue=" + priceValue + " "
-                    + "WHERE id=" + id +";";
+                    + "WHERE id=" + id + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
     }
 
-    public void updatePassword(int id, String password){
-        connect();
+    public void updatePassword(int id, String password) {
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
+            stmt = connection.createStatement();
+            String sql = "UPDATE users "
+                    + "SET password='" + password + "' "
+                    + "WHERE id=" + id + ";";
+
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public double getPriceByServiceType(String serviceType) {
+        double price = 0;
 
         try {
-            stmt = connection.createStatement();
-            String sql =    "UPDATE users "
-                    + "SET password='" + password + "' "
-                    + "WHERE id=" + id +";";
-
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public double getPriceByServiceType(String serviceType){
-        connect();
-
-        double price= 0;
-
-        try{
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sql = "SELECT priceValue FROM prices WHERE serviceType='" + serviceType +"';";
+            String sql = "SELECT priceValue FROM prices WHERE serviceType='" + serviceType + "';";
 
             //System.out.println(sql);
 
@@ -260,8 +360,21 @@ public class DatabaseConnection {
             while (rset.next()) {
                 price = rset.getDouble("priceValue");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return price;
@@ -269,13 +382,12 @@ public class DatabaseConnection {
     }
 
 
-    public List<Price> getPrices(){
-
-        connect();
-
+    public List<Price> getPrices() {
         List<Price> prices = new ArrayList<>();
 
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String pricesSQL = "SELECT * FROM carwashmanager.prices";
@@ -291,14 +403,25 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return prices;
     }
 
     public void addCarWash(double interiorCleaning, double exteriorCleaning, double engineCleaning, double polishingWaxing, double upholsteryCleaning) {
-        connect();
-
         Date dt = new Date();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -308,11 +431,12 @@ public class DatabaseConnection {
         Double totalPrice = interiorCleaning + exteriorCleaning + engineCleaning + polishingWaxing + upholsteryCleaning;
 
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "INSERT INTO track " +
-                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + totalPrice + ", " + "\'" + currentDate +  "\'" + ")";
+                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + totalPrice + ", " + "\'" + currentDate + "\'" + ")";
 
-            //System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
@@ -335,12 +459,12 @@ public class DatabaseConnection {
 
     }
 
-    public Double moneyMade(String date){
-        connect();
+    public Double moneyMade(String date) {
+        double moneyMade = 0;
 
-        double moneyMade= 0;
-
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String sql = "SELECT SUM(totalPrice) from track where " + date + ";";
@@ -353,20 +477,33 @@ public class DatabaseConnection {
             while (rset.next()) {
                 moneyMade = rset.getDouble("SUM(totalPrice)");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return moneyMade;
     }
 
 
-    public String carsWashed(String date){
-        connect();
-
+    public String carsWashed(String date) {
         int carsWashedToday = 0;
 
-        try{
+        try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String sql = "SELECT count(date) from track where " + date + ";";
@@ -379,20 +516,32 @@ public class DatabaseConnection {
             while (rset.next()) {
                 carsWashedToday = rset.getInt("count(date)");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return String.valueOf(carsWashedToday);
     }
 
-    public List<Employee> getEmployees(){
-
-        connect();
-
+    public List<Employee> getEmployees() {
         List<Employee> employee = new ArrayList<>();
 
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String employeesSql = "SELECT * FROM carwashmanager.employees";
@@ -410,18 +559,30 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return employee;
     }
 
-    public List<User> getUsers(){
-
-        connect();
-
+    public List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String usersSql = "SELECT * FROM carwashmanager.users";
@@ -441,18 +602,30 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return users;
     }
 
-    public List<Inventory> getInventory(){
-
-        connect();
-
+    public List<Inventory> getInventory() {
         List<Inventory> invetory = new ArrayList<>();
 
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
             String inventorySQL = "SELECT * FROM carwashmanager.inventory";
@@ -471,18 +644,31 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return invetory;
     }
 
     public void addEmployee(String firstName, String lastName, String email, String rank) {
-        connect();
-
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "INSERT INTO employees " +
-                    "VALUES (null, '"+ firstName + "', '" + lastName + "', '" + email + "', '" + rank + "')";
+                    "VALUES (null, '" + firstName + "', '" + lastName + "', '" + email + "', '" + rank + "')";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -508,9 +694,9 @@ public class DatabaseConnection {
     }
 
     public void addNewItem(String name, int quantity, String unit, String supplier, Double pricePerUnit) {
-        connect();
-
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "INSERT INTO inventory " +
                     "VALUES (null, '" + name + "', '" + quantity + "', '" + unit + "', '" + supplier + "', '" + pricePerUnit + "')";
@@ -538,107 +724,167 @@ public class DatabaseConnection {
 
     }
 
-    public void editItem(int id, String name, int quantity, String unit, String supplier, Double pricePerUnit){
-        connect();
-
+    public void editItem(int id, String name, int quantity, String unit, String supplier, Double pricePerUnit) {
         try {
-
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
-            String sql =    "UPDATE inventory "
-                            + "SET id=" + id + ", name='" + name + "', " + "quantity=" + quantity + ", " + "unit='" + unit + "', " + "supplier='" + supplier + "', " + "pricePerUnit=" + pricePerUnit + " "
-                            + "WHERE id=" + id +";";
+            String sql = "UPDATE inventory "
+                    + "SET id=" + id + ", name='" + name + "', " + "quantity=" + quantity + ", " + "unit='" + unit + "', " + "supplier='" + supplier + "', " + "pricePerUnit=" + pricePerUnit + " "
+                    + "WHERE id=" + id + ";";
 
             //System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
     }
 
-    public void editEmployee(int id,String firstName, String lastName, String email, String rank){
-        connect();
-
+    public void editEmployee(int id, String firstName, String lastName, String email, String rank) {
         try {
-
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
-            String sql =    "UPDATE employees "
-                            + "SET id=" + id + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
-                            + "WHERE id=" + id +";";
+            String sql = "UPDATE employees "
+                    + "SET id=" + id + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                    + "WHERE id=" + id + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
     }
 
-    public void editAccount(int id,String username, String password, String firstName, String lastName, String email, String rank){
-        connect();
-
+    public void editAccount(int id, String username, String password, String firstName, String lastName, String email, String rank) {
         try {
-
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
-            String sql =    "UPDATE users "
+            String sql = "UPDATE users "
                     + "SET id=" + id + ", username='" + username + "', " + "'password='" + password + "', firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
-                    + "WHERE id=" + id +";";
+                    + "WHERE id=" + id + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
     }
 
-    public void editAccount(int id,String username, String firstName, String lastName, String email, String rank){
-        connect();
-
+    public void editAccount(int id, String username, String firstName, String lastName, String email, String rank) {
         try {
-
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
-            String sql =    "UPDATE users "
+            String sql = "UPDATE users "
                     + "SET id=" + id + ", username='" + username + "', firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
-                    + "WHERE id=" + id +";";
+                    + "WHERE id=" + id + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
     }
 
-    public void updateUserSettings(int id, String firstName, String lastName, String email){
-        connect();
-
+    public void updateUserSettings(int id, String firstName, String lastName, String email) {
         try {
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
-            String sql =    "UPDATE employees "
+            String sql = "UPDATE employees "
                     + "SET firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "' "
-                    + "WHERE id=" + id +";";
+                    + "WHERE id=" + id + ";";
 
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 
-    public void deleteById(String tableName, int id){
-        connect();
-
+    public void deleteById(String tableName, int id) {
         try {
-
+            DataSource dataSource = getDataSource();
+            connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "DELETE FROM " + tableName + " WHERE id=" + id;
 
@@ -646,6 +892,19 @@ public class DatabaseConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //close connections to database
+            try {
+                if (stmt != null)
+                    connection.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
     }
 }

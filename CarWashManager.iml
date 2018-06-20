@@ -54,11 +54,28 @@
     </orderEntry>
     <orderEntry type="library" name="jfoenix-9.0.4" level="project" />
     <orderEntry type="library" name="jasypt" level="project" />
-    <orderEntry type="library" name="tomcat-jdbc" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/skynet/libs/tomcat-jdbc.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/skynet/libs/HikariCP-3.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/skynet/libs/slf4j-api-1.7.25.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/skynet/libs/slf4j-simple-1.7.25.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
