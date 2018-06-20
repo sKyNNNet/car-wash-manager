@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class DatabaseConnection {
 
     private String url = "jdbc:mysql://db4free.net:3306/carwashmanager?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -13,6 +14,8 @@ public class DatabaseConnection {
     private String password = "darklight1337";
     private Connection connection;
     private Statement stmt;
+
+
 
     public String sqlToday = "DAY(date)=DAY(NOW())";
     public String sqlThisMonth = "MONTH(date)=MONTH(NOW());";

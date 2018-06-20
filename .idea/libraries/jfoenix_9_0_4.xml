@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/src/skynet/libs/javax.mail.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/skynet/libs/jasypt-1.9.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/skynet/libs/mysql-connector-java-8.0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/skynet/libs/tomcat-jdbc.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

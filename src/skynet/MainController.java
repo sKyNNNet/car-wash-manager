@@ -49,13 +49,19 @@ public class MainController implements Initializable {
     @FXML
     VBox accountsListVBox;
     @FXML
+    Label employeeStats;
+    @FXML
+    Label inventoryStats;
+    @FXML
+    Label inventoryPriceStats;
+    @FXML
+    Label moneyMade;
+    @FXML
+    Label carsWashed;
+    @FXML
     Label carsWashedToday;
     @FXML
     Label carsWashedThisMonth;
-    @FXML
-    Label moneyMadeToday;
-    @FXML
-    Label moneyMadeThisMonth;
     @FXML
     TableView<Employee> employeesTable;
     @FXML
@@ -539,11 +545,29 @@ public class MainController implements Initializable {
 
     public void updateDashboard() {
 
-        carsWashedToday.setText(db.carsWashed(db.sqlToday));
-        carsWashedThisMonth.setText(db.carsWashed(db.sqlThisMonth));
+        List<Employee> employees = db.getEmployees();
+        List<Inventory> inventory = db.getInventory();
 
-        moneyMadeToday.setText(db.moneyMade(db.sqlToday).toString() + "$");
-        moneyMadeThisMonth.setText(db.moneyMade(db.sqlThisMonth).toString() + "$");
+        int inventoryItems  = 0;
+        int inventoryPrice  = 0;
+
+        for(Inventory i : inventory){
+            inventoryItems += i.getQuantity();
+            inventoryPrice += i.getPricePerUnit() * i.getQuantity();
+        }
+
+        employeeStats.setText(employees.size() + " employees");
+        inventoryStats.setText(inventoryItems + " items in inventory");
+        inventoryPriceStats.setText("inventory price - " + inventoryPrice);
+
+
+        String moneyMadeToday = db.moneyMade(db.sqlToday).toString();
+        String moneyMadeThisMonth = db.moneyMade(db.sqlThisMonth).toString();
+        moneyMade.setText(moneyMadeToday + " today / " + moneyMadeThisMonth + " mth");
+
+        String carsWashedToday = db.carsWashed(db.sqlToday);
+        String carsWashedThisMonth = db.carsWashed(db.sqlThisMonth);
+        carsWashed.setText(carsWashedToday + " today / " + carsWashedThisMonth + " mth");
 
     }
 

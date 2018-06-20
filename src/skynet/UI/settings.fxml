@@ -53,9 +53,9 @@
          </cursor>
       </JFXButton>
       <JFXTextField fx:id="interiorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="196.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
-      <JFXTextField fx:id="upholsteryCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
       <JFXTextField fx:id="exteriorCleaning" focusColor="#1f8fe8" layoutX="15.0" layoutY="266.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
       <JFXTextField fx:id="engineCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="336.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
+      <JFXTextField fx:id="upholsteryCleaning" focusColor="#1f8fe8" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
       <JFXTextField fx:id="polishingAndWaxing" focusColor="#1f8fe8" layoutX="14.0" layoutY="476.0" prefHeight="30.0" prefWidth="420.0" style="-fx-text-fill: #616161;" />
    </children>
 </AnchorPane>

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
@@ -54,6 +55,16 @@ public class SignUpController implements Initializable {
 
         DatabaseConnection db = new DatabaseConnection();
         Crypt crypt = new Crypt();
+
+        List<User> users = db.getUsers();
+
+        for(User u : users){
+            if(username.getText().toLowerCase().equals(u.getUsername())){
+                new Popup(Alert.AlertType.WARNING, "Error", "Username already exists");
+                return;
+            }
+        }
+
 
         if (!Utility.validEmail(email.getText())) {
            new Popup(Alert.AlertType.WARNING, "Error", "Incorrect email format");
