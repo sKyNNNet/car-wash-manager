@@ -23,7 +23,7 @@ public class DatabaseConnection {
     private static Statement stmt = null;
     private static DataSource datasource = null;
     public String sqlToday = "DAY(date)=DAY(NOW())";
-    public String sqlThisMonth = "MONTH(date)=MONTH(NOW());";
+    public String sqlThisMonth = "MONTH(date)=MONTH(NOW())";
 
     public static DataSource getDataSource() {
         if (datasource == null) {
@@ -422,12 +422,6 @@ public class DatabaseConnection {
     }
 
     public void addCarWash(double interiorCleaning, double exteriorCleaning, double engineCleaning, double polishingWaxing, double upholsteryCleaning) {
-        Date dt = new Date();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String currentDate = sdf.format(dt);
-
         Double totalPrice = interiorCleaning + exteriorCleaning + engineCleaning + polishingWaxing + upholsteryCleaning;
 
         try {
@@ -435,7 +429,7 @@ public class DatabaseConnection {
             connection = dataSource.getConnection();
             stmt = connection.createStatement();
             String sql = "INSERT INTO track " +
-                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + totalPrice + ", " + "\'" + currentDate + "\'" + ")";
+                    "VALUES (null, " + interiorCleaning + ", " + exteriorCleaning + ", " + engineCleaning + ", " + polishingWaxing + ", " + upholsteryCleaning + ", " + totalPrice + ", "  + "NOW()" + ")";
 
             stmt.executeUpdate(sql);
 
@@ -493,7 +487,6 @@ public class DatabaseConnection {
                 se.printStackTrace();
             }
         }
-
         return moneyMade;
     }
 
@@ -762,7 +755,7 @@ public class DatabaseConnection {
             //fucking `rank` is a reserved keyword in mysql how tf should i know, at least tell me in the error you piece of shit
             stmt = connection.createStatement();
             String sql = "UPDATE employees "
-                    + "SET id=" + id + "firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
+                    + "SET id=" + id + ", firstName='" + firstName + "', " + "lastName='" + lastName + "', " + "email='" + email + "', " + "`rank`='" + rank + "' "
                     + "WHERE id=" + id + ";";
 
             System.out.println(sql);
