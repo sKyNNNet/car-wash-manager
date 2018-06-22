@@ -479,6 +479,7 @@ public class MainController implements Initializable {
     //tab switcher
     public void showDashboardTab() {
         if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            updateDashboard();
             dashboardVBox.setVisible(true);
             employeesVBox.setVisible(false);
             inventoryVBox.setVisible(false);

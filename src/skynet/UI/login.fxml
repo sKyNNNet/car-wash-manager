@@ -22,7 +22,7 @@
             <Font name="System Bold" size="14.0" />
          </font></Button>
       <Hyperlink layoutX="476.0" layoutY="345.0" onMouseClicked="#forgotPasswordClick" text="Forgot password?" textFill="#a2a2a2" />
-      <Hyperlink layoutX="513.0" layoutY="368.0" onMouseClicked="#signUpButton" text="or sign Up" textFill="#a2a2a2" />
+      <Hyperlink layoutX="513.0" layoutY="368.0" onAction="#signUpButtonClick" onMouseClicked="#signUpButtonClick" text="or sign Up" textFill="#a2a2a2" />
       <Label layoutX="189.0" layoutY="211.0" text="Username" textFill="#a2a2a2">
          <font>
             <Font name="Ebrima Bold" size="12.0" />
@@ -34,6 +34,6 @@
          </font>
       </Label>
       <JFXTextField fx:id="loginUsername" focusColor="#1f8fe8" layoutX="189.0" layoutY="228.0" prefHeight="25.0" prefWidth="188.0" />
-      <JFXPasswordField fx:id="loginPassowrd" focusColor="#1f8fe8" layoutX="189.0" layoutY="291.0" onAction="#login" prefHeight="25.0" prefWidth="188.0" />
+      <JFXPasswordField fx:id="loginPassword" focusColor="#1f8fe8" layoutX="189.0" layoutY="291.0" onAction="#login" prefHeight="25.0" prefWidth="188.0" />
    </children>
 </Pane>

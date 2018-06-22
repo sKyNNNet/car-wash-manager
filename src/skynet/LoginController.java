@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class LoginController {
     @FXML TextField loginUsername;
-    @FXML TextField loginPassowrd;
+    @FXML TextField loginPassword;
     @FXML Button loginButton;
 
     private Boolean disableLogin = false;
@@ -47,7 +47,7 @@ public class LoginController {
             mainStage.show();
         } else {
             DatabaseConnection db = new DatabaseConnection();
-            boolean goodLogin = db.checkLogin(loginUsername.getText(), loginPassowrd.getText());
+            boolean goodLogin = db.checkLogin(loginUsername.getText(), loginPassword.getText());
 
             if(goodLogin){
                 ((Node) event.getSource()).getScene().getWindow().hide();
@@ -80,7 +80,7 @@ public class LoginController {
 
     }
 
-    public void signUpButton(Event event){
+    public void signUpButtonClick(Event event){
         try {
             ((Node)event.getSource()).getScene().getWindow().hide();
             Parent root = FXMLLoader.load(getClass().getResource("UI/signup.fxml"));

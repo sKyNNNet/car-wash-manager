@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -52,8 +50,8 @@ public class DatabaseConnection {
             connection = dataSource.getConnection();
             stmt = connection.createStatement();
 
-            String sqlPassowrd = "SELECT password FROM carwashmanager.users WHERE username='" + username + "';";
-            ResultSet rset = stmt.executeQuery(sqlPassowrd);
+            String sqlPassword = "SELECT password FROM carwashmanager.users WHERE username='" + username + "';";
+            ResultSet rset = stmt.executeQuery(sqlPassword);
             String encryptedLoginPassword = null;
 
             while (rset.next()) {

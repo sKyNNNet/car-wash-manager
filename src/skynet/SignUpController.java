@@ -29,7 +29,6 @@ public class SignUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         //allow only alphanumeric input for username
         username.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^[a-zA-Z0-9]*$")) {
@@ -39,7 +38,7 @@ public class SignUpController implements Initializable {
 
     }
 
-    public void signUpButton(Event event) {
+    public void signUp(Event event) {
 
         if(username.getText().isEmpty()){
             new Popup(Alert.AlertType.WARNING, "Error", "Username can't be empty");
@@ -98,7 +97,7 @@ public class SignUpController implements Initializable {
         }
     }
 
-    public void alreadyMemberButton(Event event) {
+    public void alreadyMember(Event event) {
         try {
             ((Node) event.getSource()).getScene().getWindow().hide();
             FXMLLoader fxmlLoader = new FXMLLoader();
