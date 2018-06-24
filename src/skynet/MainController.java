@@ -112,14 +112,9 @@ public class MainController implements Initializable {
     AnchorPane scrollBoxPane;
     @FXML
     MenuButton userMenu;
-    @FXML
-    JFXButton adminDashboardEditButton;
-
-    @FXML
-    Label userIdLabel;
 
     private DatabaseConnection db = new DatabaseConnection();
-    private String loginRank = "unranked";
+    public static String loginRank = "unranked";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -322,6 +317,7 @@ public class MainController implements Initializable {
 
     public void addNewEmployee() {
         try {
+
             Parent root = FXMLLoader.load(getClass().getResource("UI/addNewEmployee.fxml"));
             Stage mainStage = new Stage();
             Scene mainScene = new Scene(root);
@@ -479,6 +475,7 @@ public class MainController implements Initializable {
     //tab switcher
     public void showDashboardTab() {
         if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            noPower.setVisible(false);
             updateDashboard();
             dashboardVBox.setVisible(true);
             employeesVBox.setVisible(false);
@@ -496,6 +493,7 @@ public class MainController implements Initializable {
 
     public void showEmployeesTab() {
         if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            noPower.setVisible(false);
             dashboardVBox.setVisible(false);
             employeesVBox.setVisible(true);
             inventoryVBox.setVisible(false);
@@ -512,6 +510,7 @@ public class MainController implements Initializable {
 
     public void showInventoryTab() {
         if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
+            noPower.setVisible(false);
             dashboardVBox.setVisible(false);
             employeesVBox.setVisible(false);
             inventoryVBox.setVisible(true);
@@ -529,6 +528,7 @@ public class MainController implements Initializable {
     public void showAccountsListTab() {
 
         if (loginRank.equals("CEO")) {
+            noPower.setVisible(false);
             dashboardVBox.setVisible(false);
             employeesVBox.setVisible(false);
             inventoryVBox.setVisible(false);
@@ -760,7 +760,7 @@ public class MainController implements Initializable {
             noPower.setVisible(true);
         }
 
-        if (loginRank.equals("CEO")) {
+        if (loginRank.equals("CEO") || loginRank.equals("Assistant")) {
             dashboardVBox.setVisible(true);
             noPower.setVisible(false);
         }

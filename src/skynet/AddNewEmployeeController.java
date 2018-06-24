@@ -19,10 +19,18 @@ public class AddNewEmployeeController implements Initializable {
     @FXML TextField lastName;
     @FXML TextField email;
     @FXML JFXComboBox rank;
+    private String loginRank;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
+        loginRank = MainController.loginRank;
+
+        if(loginRank.equals("CEO")){
+            rank.getItems().addAll("CEO", "Assistant", "Car Washer", "unranked");
+        } else {
+            rank.getItems().addAll("Assistant", "Car Washer", "unranked");
+        }
+
         //allow only letter for first name / last name
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\sa-zA-Z*")) {
