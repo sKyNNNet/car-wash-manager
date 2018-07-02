@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="commons-pool2-2.5.01">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/skynet/libs/commons-pool2-2.5.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

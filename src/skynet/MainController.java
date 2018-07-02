@@ -135,7 +135,6 @@ public class MainController implements Initializable {
         ScrollPane scrollPane = new ScrollPane(teamMembersVBox);
         scrollPane.setFitToWidth(true);
         scrollBoxPane.getChildren().add(scrollPane);
-
     }
 
     public void addTeamMemberToLayout(String name, String rank) {
